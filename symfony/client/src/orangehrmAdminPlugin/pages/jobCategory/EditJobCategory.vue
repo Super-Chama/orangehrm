@@ -56,6 +56,9 @@
 </template>
 
 <script>
+import useUpdate from '@/core/util/composable/useUpdate';
+import useRules from '@/core/util/composable/useRules';
+
 export default {
   props: {
     jobCategoryId: {
@@ -63,25 +66,30 @@ export default {
       required: true,
     },
   },
-  data() {
+  setup(props) {
+    const category = {
+      id: '',
+      name: '',
+    };
+    const _rules = {
+      name: ['required', 'max|60'],
+    };
+    const {dto, isLoading, execQueryUpdate} = useUpdate(
+      props.jobCategoryId,
+      'api/v1/admin/job-categories',
+      category,
+    );
+    const {rules} = useRules(_rules);
     return {
-      category: {
-        id: '',
-        name: '',
-      },
-      rules: {
-        name: [],
-      },
-      errors: [],
+      isLoading,
+      execQueryUpdate,
+      category: dto,
+      rules,
     };
   },
   methods: {
     onSave() {
-      // TODO: Loading
-      this.$http
-        .put(`api/v1/admin/job-categories/${this.category.id}`, {
-          name: this.category.name,
-        })
+      this.execQueryUpdate()
         .then(() => {
           // go back
           this.onCancel();
@@ -93,41 +101,6 @@ export default {
     onCancel() {
       history.go(-1);
     },
-  },
-  created() {
-    this.$http
-      .get(`api/v1/admin/job-categories/${this.jobCategoryId}`)
-      .then(response => {
-        const {data} = response.data;
-        this.category.id = data.id;
-        this.category.name = data.name;
-        // Fetch list data for unique test
-        this.$http.get(`api/v1/admin/job-categories`).then(response => {
-          const {data} = response.data;
-          this.rules.name.push(v => {
-            return (!!v && v.trim() !== '') || 'Required';
-          });
-          this.rules.name.push(v => {
-            return (
-              (v && v.length <= 100) || 'Should be less than 50 characters'
-            );
-          });
-          this.rules.name.push(v => {
-            const index = data.findIndex(item => item.name == v);
-            if (index > -1) {
-              const {id} = data[index];
-              return id != this.category.id
-                ? 'Job category name should be unique'
-                : true;
-            } else {
-              return true;
-            }
-          });
-        });
-      })
-      .catch(error => {
-        console.log(error);
-      });
   },
 };
 </script>

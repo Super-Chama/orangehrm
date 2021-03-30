@@ -56,26 +56,34 @@
 </template>
 
 <script>
+import useInsert from '@/core/util/composable/useInsert';
+
 export default {
+  setup() {
+    const category = {
+      id: '',
+      name: '',
+    };
+    const {dto, isLoading, execQuery} = useInsert(
+      'api/v1/admin/job-categories',
+      category,
+    );
+    return {
+      isLoading,
+      execQuery,
+      category: dto,
+    };
+  },
   data() {
     return {
-      category: {
-        id: '',
-        name: '',
-      },
       rules: {
         name: [],
       },
-      errors: [],
     };
   },
   methods: {
     onSave() {
-      // TODO: Loading
-      this.$http
-        .post(`api/v1/admin/job-categories`, {
-          name: this.category.name,
-        })
+      this.execQuery()
         .then(() => {
           // go back
           this.onCancel();
