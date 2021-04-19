@@ -17,7 +17,6 @@
  */
 
 import {createApp} from 'vue';
-import axios, {AxiosInstance} from 'axios';
 import components from './components';
 import pages from './pages';
 import toaster, {ToasterAPI} from './core/plugins/toaster/toaster';
@@ -44,19 +43,12 @@ const baseUrl = window.appGlobal.baseUrl;
 // https://github.com/vuejs/vue-next/pull/982
 declare module '@vue/runtime-core' {
   interface ComponentCustomProperties {
-    $http: AxiosInstance;
     $toast: ToasterAPI;
   }
 }
 
-// TODO:: Remove globalProperties if not using
 app.config.globalProperties.global = {
   baseUrl,
 };
-
-app.config.globalProperties.$http = axios.create({
-  baseURL: baseUrl,
-  timeout: 3000,
-});
 
 app.mount('#app');
