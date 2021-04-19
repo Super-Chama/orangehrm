@@ -41,7 +41,7 @@
               class="orangehrm-horizontal-margin"
             />
           </div>
-          <oxd-text tag="span" v-else>{{itemsCountText}}</oxd-text>
+          <oxd-text tag="span" v-else>{{ itemsCountText }}</oxd-text>
         </div>
       </div>
       <div class="orangehrm-container">
@@ -71,6 +71,7 @@
 import usePaginate from '@orangehrm/core/util/composable/usePaginate';
 import DeleteConfirmationDialog from '@orangehrm/components/dialogs/DeleteConfirmationDialog';
 import {navigate} from '@orangehrm/core/util/helper/navigation';
+import {APIService} from '@/core/util/services/api.service';
 
 export default {
   data() {
@@ -109,6 +110,10 @@ export default {
   },
 
   setup() {
+    const http = new APIService(
+      window.appGlobal.baseUrl,
+      'api/v1/admin/job-categories',
+    );
     const {
       showPaginator,
       currentPage,
@@ -118,8 +123,9 @@ export default {
       response,
       isLoading,
       execQuery,
-    } = usePaginate('api/v1/admin/job-categories');
+    } = usePaginate(http);
     return {
+      http,
       showPaginator,
       currentPage,
       isLoading,
@@ -164,17 +170,21 @@ export default {
       });
     },
     deleteItems(items) {
-      // TODO: Loading
       if (items instanceof Array) {
-        this.$http
-          .delete('api/v1/admin/job-categories', {
-            data: {ids: items},
+        this.isLoading = true;
+        this.http
+          .deleteAll({
+            ids: items,
           })
           .then(() => {
-            this.resetDataTable();
+            return this.$toast.success({
+              title: 'Success',
+              message: 'Job category deleted successfully!',
+            });
           })
-          .catch(error => {
-            console.log(error);
+          .then(() => {
+            this.isLoading = false;
+            this.resetDataTable();
           });
       }
     },
