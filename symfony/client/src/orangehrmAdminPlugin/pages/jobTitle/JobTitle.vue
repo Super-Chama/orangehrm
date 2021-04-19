@@ -41,7 +41,7 @@
               class="orangehrm-horizontal-margin"
             />
           </div>
-          <oxd-text tag="span" v-else>{{itemsCountText}}</oxd-text>
+          <oxd-text tag="span" v-else>{{ itemsCountText }}</oxd-text>
         </div>
       </div>
       <div class="orangehrm-container">
@@ -64,16 +64,14 @@
     </div>
 
     <delete-confirmation ref="deleteDialog"></delete-confirmation>
-    <toast-container ref="toastContainer"></toast-container>
   </div>
 </template>
 
 <script>
 import usePaginate from '@orangehrm/core/util/composable/usePaginate';
 import {navigate} from '@orangehrm/core/util/helper/navigation';
+import {APIService} from '@/core/util/services/api.service';
 import DeleteConfirmationDialog from '@orangehrm/components/dialogs/DeleteConfirmationDialog.vue';
-import ToastContainer from '@orangehrm/components/ToastContainer.vue';
-import {TYPE_SUCCESS} from '@orangehrm/oxd/src/core/components/Toast/types';
 
 export default {
   data() {
@@ -110,10 +108,13 @@ export default {
 
   components: {
     'delete-confirmation': DeleteConfirmationDialog,
-    'toast-container': ToastContainer,
   },
 
   setup() {
+    const http = new APIService(
+      window.appGlobal.baseUrl,
+      'api/v1/admin/job-titles',
+    );
     const {
       showPaginator,
       currentPage,
@@ -123,8 +124,9 @@ export default {
       response,
       isLoading,
       execQuery,
-    } = usePaginate('api/v1/admin/job-titles');
+    } = usePaginate(http);
     return {
+      http,
       showPaginator,
       currentPage,
       isLoading,
@@ -170,22 +172,21 @@ export default {
       });
     },
     deleteItems(items) {
-      // TODO: Loading
       if (items instanceof Array) {
-        this.$http
-          .delete('api/v1/admin/job-titles', {
-            data: {ids: items},
+        this.isLoading = true;
+        this.http
+          .deleteAll({
+            ids: items,
           })
           .then(() => {
-            this.resetDataTable();
-            this.$refs.toastContainer.push({
-              type: TYPE_SUCCESS,
+            return this.$toast.success({
               title: 'Success',
-              message: 'Successfully Deleted',
+              message: 'Job title deleted successfully!',
             });
           })
-          .catch(error => {
-            console.log(error);
+          .then(() => {
+            this.isLoading = false;
+            this.resetDataTable();
           });
       }
     },
