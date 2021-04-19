@@ -72,7 +72,12 @@
     <br />
     <div class="orangehrm-paper-container">
       <div class="orangehrm-header-container">
-        <oxd-button label="Add" displayType="secondary" @click="onClickAdd" />
+        <oxd-button
+          label="Add"
+          iconName="plus"
+          displayType="secondary"
+          @click="onClickAdd"
+        />
       </div>
       <oxd-divider class="orangehrm-horizontal-margin" />
       <div>
@@ -83,6 +88,7 @@
             </oxd-text>
             <oxd-button
               label="Delete Selected"
+              iconName="trash-fill"
               displayType="label-danger"
               @click="onClickDeleteSelected"
               class="orangehrm-horizontal-margin"

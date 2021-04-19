@@ -84,7 +84,7 @@ const Toaster = defineComponent({
       {appear: true, name: this.transition, tag: 'div', class: this.classes},
       {
         default: () =>
-          this.toasts.map((toast: any, index: number) => {
+          this.toasts.map((toast: Toast, index: number) => {
             return h(ToastComponent, {
               key: toast.id,
               type: toast.type,
