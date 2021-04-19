@@ -22,7 +22,7 @@
   <oxd-button
     class="orangehrm-left-space"
     displayType="secondary"
-    label="Submit"
+    label="Save"
     type="submit"
   />
 </template>

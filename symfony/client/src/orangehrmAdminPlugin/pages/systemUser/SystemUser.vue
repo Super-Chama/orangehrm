@@ -118,6 +118,7 @@
 import DeleteConfirmationDialog from '@orangehrm/components/dialogs/DeleteConfirmationDialog';
 import usePaginate from '@orangehrm/core/util/composable/usePaginate';
 import {navigate} from '@orangehrm/core/util/helper/navigation';
+import {APIService} from '@/core/util/services/api.service';
 
 const userdataNormalizer = data => {
   return data.map(item => {
@@ -205,6 +206,7 @@ export default {
   },
 
   setup() {
+    const http = new APIService(window.appGlobal.baseUrl, 'api/v1/admin/users');
     const {
       showPaginator,
       currentPage,
@@ -214,8 +216,9 @@ export default {
       response,
       isLoading,
       execQuery,
-    } = usePaginate('api/v1/admin/users', userdataNormalizer);
+    } = usePaginate(http, userdataNormalizer);
     return {
+      http,
       showPaginator,
       currentPage,
       isLoading,
@@ -261,17 +264,21 @@ export default {
       });
     },
     deleteItems(items) {
-      // TODO: Loading
       if (items instanceof Array) {
-        this.$http
-          .delete('api/v1/admin/users', {
-            data: {ids: items},
+        this.isLoading = true;
+        this.http
+          .deleteAll({
+            ids: items,
           })
           .then(() => {
-            this.resetDataTable();
+            return this.$toast.success({
+              title: 'Success',
+              message: 'User deleted successfully!',
+            });
           })
-          .catch(error => {
-            console.log(error);
+          .then(() => {
+            this.isLoading = false;
+            this.resetDataTable();
           });
       }
     },
