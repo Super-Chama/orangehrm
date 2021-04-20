@@ -139,6 +139,7 @@ export default {
             return true;
           }
         });
+        this.isLoading = false;
       })
       .finally(() => {
         this.isLoading = false;

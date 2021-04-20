@@ -120,6 +120,7 @@ export default {
           const index = data.findIndex(item => item.name == v);
           return index === -1 || 'Job category name should be unique';
         });
+        this.isLoading = false;
       })
       .finally(() => {
         this.isLoading = false;
