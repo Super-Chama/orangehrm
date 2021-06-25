@@ -21,7 +21,7 @@
 <template>
   <div class="orangehrm-background-container">
     <div class="orangehrm-card-container">
-      <oxd-text tag="h6" class="orangehrm-main-title">Add Job Title</oxd-text>
+      <oxd-text tag="h6" class="orangehrm-main-title">{{ $t("hello") }}</oxd-text>
 
       <oxd-divider />
 
@@ -160,6 +160,7 @@ export default {
   },
 
   created() {
+    this.$store.setState('secret', 1);
     this.isLoading = true;
     this.http
       .getAll({limit: 0})
@@ -172,6 +173,7 @@ export default {
       })
       .finally(() => {
         this.isLoading = false;
+        console.log(this.$store.getState('secret'));
       });
   },
 };

@@ -16,6 +16,7 @@
  * Boston, MA  02110-1301, USA
  */
 
+import { getState, setState } from '@/core/plugins/store/store';
 import axios, {
   AxiosError,
   AxiosInstance,
@@ -45,6 +46,8 @@ export class APIService {
       'Cache-Control':
         'no-store, no-cache, must-revalidate, post-check=0, pre-check=0',
     };
+    console.log(getState('secret'))
+    setState('secret', 55)
     return this._http.get(this._apiSection, {headers, params});
   }
 
