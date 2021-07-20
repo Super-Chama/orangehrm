@@ -21,10 +21,10 @@ namespace OrangeHRM\Pim\Controller;
 
 use Exception;
 use OrangeHRM\Core\Authorization\Controller\CapableViewController;
-use OrangeHRM\Core\Authorization\Helper\UserRoleManagerHelper;
 use OrangeHRM\Core\Controller\AbstractVueController;
 use OrangeHRM\Core\Helper\VueControllerHelper;
 use OrangeHRM\Core\Traits\Service\ConfigServiceTrait;
+use OrangeHRM\Core\Traits\UserRoleManagerTrait;
 use OrangeHRM\Core\Vue\Prop;
 use OrangeHRM\Framework\Http\Request;
 use OrangeHRM\Framework\Services;
@@ -33,6 +33,7 @@ use OrangeHRM\Pim\Service\PIMLeftMenuService;
 abstract class BaseViewEmployeeController extends AbstractVueController implements CapableViewController
 {
     use ConfigServiceTrait;
+    use UserRoleManagerTrait;
 
     /**
      * @var PIMLeftMenuService|null
@@ -86,9 +87,7 @@ abstract class BaseViewEmployeeController extends AbstractVueController implemen
      */
     public function isCapable(Request $request): bool
     {
-        /** @var UserRoleManagerHelper $userRoleManagerHelper */
-        $userRoleManagerHelper = $this->getContainer()->get(Services::USER_ROLE_MANAGER_HELPER);
-        $permission = $userRoleManagerHelper->getDataGroupPermissionsForEmployee(
+        $permission = $this->getUserRoleManagerHelper()->getDataGroupPermissionsForEmployee(
             $this->getDataGroupsForCapabilityCheck(),
             $request->get('empNumber')
         );
@@ -102,9 +101,10 @@ abstract class BaseViewEmployeeController extends AbstractVueController implemen
      */
     protected function setPermissionsForEmployee(array $dataGroups, int $empNumber)
     {
-        /** @var UserRoleManagerHelper $userRoleManagerHelper */
-        $userRoleManagerHelper = $this->getContainer()->get(Services::USER_ROLE_MANAGER_HELPER);
-        $permissions = $userRoleManagerHelper->getDataGroupPermissionCollectionForEmployee($dataGroups, $empNumber);
+        $permissions = $this->getUserRoleManagerHelper()->getDataGroupPermissionCollectionForEmployee(
+            $dataGroups,
+            $empNumber
+        );
         $this->getContext()->set(
             VueControllerHelper::PERMISSIONS,
             $permissions->toArray()

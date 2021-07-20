@@ -19,28 +19,37 @@
 
 namespace OrangeHRM\Core\Traits;
 
-use OrangeHRM\Core\Authorization\Helper\UserRoleManagerHelper;
-use OrangeHRM\Core\Authorization\Manager\AbstractUserRoleManager;
-use OrangeHRM\Core\Authorization\Manager\BasicUserRoleManager;
+use OrangeHRM\Framework\Framework;
+use OrangeHRM\Framework\Http\Request;
+use OrangeHRM\Framework\Http\RequestStack;
+use OrangeHRM\Framework\Http\Response;
 use OrangeHRM\Framework\Services;
 
-trait UserRoleManagerTrait
+trait ControllerTrait
 {
-    use ServiceContainerTrait;
-
     /**
-     * @return AbstractUserRoleManager|BasicUserRoleManager
+     * Forwards the request to another controller.
+     *
+     * @param string $controller The controller name (a string like OrangeHRM\Controller\PostController::handle)
      */
-    protected function getUserRoleManager(): AbstractUserRoleManager
+    protected function forward(string $controller, array $path = [], array $query = []): Response
     {
-        return $this->getContainer()->get(Services::USER_ROLE_MANAGER);
+        $request = $this->getCurrentRequest();
+        $path['_controller'] = $controller;
+        $subRequest = $request->duplicate($query, null, $path);
+
+        /** @var Framework $kernel */
+        $kernel = $this->getContainer()->get(Services::HTTP_KERNEL);
+        return $kernel->handle($subRequest, Framework::SUB_REQUEST);
     }
 
     /**
-     * @return UserRoleManagerHelper
+     * @return Request|null
      */
-    protected function getUserRoleManagerHelper(): UserRoleManagerHelper
+    protected function getCurrentRequest(): ?Request
     {
-        return $this->getContainer()->get(Services::USER_ROLE_MANAGER_HELPER);
+        /** @var RequestStack $requestStack */
+        $requestStack = $this->getContainer()->get(Services::REQUEST_STACK);
+        return $requestStack->getCurrentRequest();
     }
 }
