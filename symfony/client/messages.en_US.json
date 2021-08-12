@@ -110,6 +110,11 @@
           "source": "Search",
           "target": "Search",
           "description": ""
+        },
+        "name": {
+          "source": "Name",
+          "target": "Name",
+          "description": "Name"
         }
       }
     },
@@ -260,6 +265,36 @@
           "source": "My Leave Entitlements",
           "target": "My Leave Entitlements",
           "description": "If the user is an ESS User, then he will only see the “My Leave Entitlements and Usage Report” option under Leave&gt;&gt;Reports"
+        },
+        "is_entitlement_situational": {
+          "source": "Is Entitlement Situational?",
+          "target": "Is Entitlement Situational?",
+          "description": "By clicking the “Is Entitlement Situational” option, the leave type will be excluded from reports unless there is some activity. For example: maternity leave, jury duty leave."
+        },
+        "yes": {
+          "source": "Yes",
+          "target": "Yes",
+          "description": "Is entitlement situational value"
+        },
+        "no": {
+          "source": "No",
+          "target": "No",
+          "description": "Is entitlement situational value"
+        },
+        "leave_types": {
+          "source": "Leave Types",
+          "target": "Leave Types",
+          "description": "The leave types can be defined in this option. To add an entry, go to Leave&gt;&gt; Configure&gt;&gt; Leave Types and click “Add”"
+        },
+        "add_leave_type": {
+          "source": "Add Leave Type",
+          "target": "Add Leave Type",
+          "description": "The leave types that is needed by the company."
+        },
+        "edit_leave_type": {
+          "source": "Edit Leave Type",
+          "target": "Edit Leave Type",
+          "description": "Alter the leave type that is needed by the company"
         }
       }
     }

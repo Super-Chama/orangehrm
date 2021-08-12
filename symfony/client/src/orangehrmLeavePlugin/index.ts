@@ -22,6 +22,9 @@ import LeaveAssign from './pages/LeaveAssign.vue';
 import AddEntitlement from './pages/entitlements/AddEntitlement.vue';
 import LeaveEntitlements from './pages/entitlements/LeaveEntitlements.vue';
 import MyLeaveEntitlements from './pages/entitlements/MyLeaveEntitlements.vue';
+import LeaveType from './pages/leaveType/LeaveType.vue';
+import EditLeaveType from './pages/leaveType/EditLeaveType.vue';
+import SaveLeaveType from './pages/leaveType/SaveLeaveType.vue';
 
 export default {
   'leave-period': LeavePeriod,
@@ -30,4 +33,7 @@ export default {
   'leave-add-entitlement': AddEntitlement,
   'leave-view-entitlement': LeaveEntitlements,
   'leave-view-my-entitlement': MyLeaveEntitlements,
+  'leave-type-edit': EditLeaveType,
+  'leave-type-list': LeaveType,
+  'leave-type-save': SaveLeaveType,
 };

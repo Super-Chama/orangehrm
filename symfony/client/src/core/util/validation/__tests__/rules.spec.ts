@@ -17,7 +17,6 @@
  */
 
 import {
-  decimalsOnly,
   required,
   afterDate,
   endDateShouldBeAfterStartDate,
@@ -228,35 +227,57 @@ describe('core/util/validation/rules::validPhoneNumberFormat', () => {
   });
 });
 
-describe('core/util/validation/rules::decimalsOnly', () => {
-  test('validPhoneNumberFormat::number', () => {
-    const result = validPhoneNumberFormat('1234563');
-    expect(result).toBeTruthy();
+describe('core/util/validation/rules::endTimeShouldBeAfterStartTime', () => {
+  test('endTimeShouldBeAfterStartTime:: should not validate on empty string', () => {
+    let result = endTimeShouldBeAfterStartTime('')('');
+    expect(result).toEqual(true);
+
+    result = endTimeShouldBeAfterStartTime('12:00')('');
+    expect(result).toEqual(true);
   });
 
-  test('decimalsOnly::numberWith.', () => {
-    const result = decimalsOnly('123.');
-    expect(result).toBe('Should be a number');
+  test('endTimeShouldBeAfterStartTime:: should allow valid time', () => {
+    const result = endTimeShouldBeAfterStartTime('08:00')('09:00');
+    expect(result).toEqual(true);
   });
 
-  test('decimalsOnly::numberWithcharater', () => {
-    const result = decimalsOnly('123c');
-    expect(result).toBe('Should be a number');
+  test('endTimeShouldBeAfterStartTime:: should return message on invalid time', () => {
+    const result = endTimeShouldBeAfterStartTime('08:00')('07:00');
+    expect(result).toEqual('End time should be after start time');
   });
 
-  test('decimalsOnly::numberonly', () => {
-    const result = decimalsOnly('4420');
-    expect(result).toStrictEqual(true);
+  test('endTimeShouldBeAfterStartTime:: should allow valid time given as function', () => {
+    const result = endTimeShouldBeAfterStartTime(() => '08:00')('09:00');
+    expect(result).toEqual(true);
   });
 
-  test('decimalsOnly::numberonlywithonedecimalpoint', () => {
-    const result = decimalsOnly('456.0');
-    expect(result).toStrictEqual(true);
+  test('endTimeShouldBeAfterStartTime:: should return custom message on invalid time', () => {
+    const result = endTimeShouldBeAfterStartTime(
+      '08:00',
+      'Invalid time',
+    )('07:00');
+    expect(result).toEqual('Invalid time');
   });
 
-  test('decimalsOnly::numberonlywithtwodecimalpoint', () => {
-    const result = decimalsOnly('456.00');
-    expect(result).toStrictEqual(true);
+  test('endTimeShouldBeAfterStartTime:: should allow valid time with custom format', () => {
+    const result = endTimeShouldBeAfterStartTime('11:00 AM', undefined, {
+      timeFormat: 'hh:mm a',
+    })('07:00 PM');
+    expect(result).toEqual(true);
+  });
+
+  test('endTimeShouldBeAfterStartTime:: should allow same time as start time when allowSameTime is true', () => {
+    const result = endTimeShouldBeAfterStartTime('11:00', undefined, {
+      allowSameTime: true,
+    })('11:00');
+    expect(result).toEqual(true);
+  });
+
+  test('endTimeShouldBeAfterStartTime:: should not allow invalid time when allowSameTime is true', () => {
+    const result = endTimeShouldBeAfterStartTime('11:00', undefined, {
+      allowSameTime: true,
+    })('10:00');
+    expect(result).toEqual('End time should be after start time');
   });
 });
 

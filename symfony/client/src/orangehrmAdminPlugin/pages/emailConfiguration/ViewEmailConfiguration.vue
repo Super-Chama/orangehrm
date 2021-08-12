@@ -199,6 +199,7 @@
 
         <oxd-form-actions>
           <required-text />
+          <oxd-button displayType="ghost" label="Reset" @click="onReset" />
           <submit-button />
         </oxd-form-actions>
       </oxd-form>
@@ -253,13 +254,17 @@ export default {
         smtpSecurityType: '',
         testEmailAddress: '',
       },
+      initialEmailConfiguration: {
+        ...this.emailConfiguration,
+        userSecureConnection: false,
+      },
       rules: {
         mailType: [required, shouldNotExceedCharLength(50)],
-        sentAs: [required, shouldNotExceedCharLength(250), validEmailFormat],
-        smtpHost: [required, shouldNotExceedCharLength(250)],
+        sentAs: [required, shouldNotExceedCharLength(100), validEmailFormat],
+        smtpHost: [required, shouldNotExceedCharLength(100)],
         smtpPort: [shouldNotExceedCharLength(10)],
-        smtpUsername: [required, shouldNotExceedCharLength(250)],
-        smtpPassword: [required, shouldNotExceedCharLength(250)],
+        smtpUsername: [required, shouldNotExceedCharLength(100)],
+        smtpPassword: [required, shouldNotExceedCharLength(100)],
         smtpAuthType: [shouldNotExceedCharLength(50)],
         smtpSecurityType: [shouldNotExceedCharLength(50)],
         testEmailAddress: [
@@ -303,7 +308,7 @@ export default {
             });
           } else if (testEmailStatus === 0 && this.sendTestMailEditable) {
             this.$toast.warn({
-              title: 'Success',
+              title: 'Failed',
               message: 'Test Email Not Sent',
             });
           }
@@ -312,6 +317,10 @@ export default {
         .then(() => {
           this.isLoading = false;
         });
+    },
+    onReset() {
+      this.emailConfiguration = {...this.initialEmailConfiguration};
+      this.userSecureConnection = this.initialEmailConfiguration.userSecureConnection;
     },
   },
   created() {
@@ -333,6 +342,10 @@ export default {
         this.emailConfiguration.smtpSecurityType = data.smtpSecurityType;
         this.emailConfiguration.testEmailAddress = data.testEmailAddress;
         this.userSecureConnection = data.smtpSecurityType !== 'none';
+        this.initialEmailConfiguration = {
+          ...this.emailConfiguration,
+          userSecureConnection: this.userSecureConnection,
+        };
       })
       .finally(() => {
         this.isLoading = false;
