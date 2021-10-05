@@ -588,3 +588,13 @@ pim_employee_tax_exemption:
   path: /pim/viewUsTaxExemptions/empNumber/{empNumber}
   controller: OrangeHRM\Pim\Controller\EmpUsTaxExemptionController::handle
   methods: [ GET ]
+
+pim_view_employee_reports:
+  path: /pim/viewDefinedPredefinedReports
+  controller: OrangeHRM\Pim\Controller\EmployeeReportController::handle
+  methods: [ GET ]
+
+pim_save_employee_reports:
+  path: /pim/definePredefinedReport
+  controller: OrangeHRM\Pim\Controller\SaveEmployeeReportController::handle
+  methods: [ GET ]
