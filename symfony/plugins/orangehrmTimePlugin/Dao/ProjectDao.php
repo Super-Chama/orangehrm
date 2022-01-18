@@ -212,4 +212,17 @@ class ProjectDao extends BaseDao
         $qb->setParameter('projectId', $projectId);
         return $this->getPaginator($qb)->count() > 0;
     }
+
+    /**
+     * @return int[]
+     */
+    public function getUnselectableProjectIds(): array
+    {
+        $qb = $this->createQueryBuilder(TimesheetItem::class, 'timesheetItem');
+        $qb->leftJoin('timesheetItem.project', 'project');
+        $qb->select('project.id');
+        $qb->addGroupBy('project.id');
+        $result = $qb->getQuery()->getArrayResult();
+        return array_column($result, 'id');
+    }
 }
