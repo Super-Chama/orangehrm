@@ -24,10 +24,12 @@ use OrangeHRM\Core\Vue\Component;
 use OrangeHRM\Core\Vue\Prop;
 use OrangeHRM\Framework\Http\Request;
 use OrangeHRM\Time\Controller\Traits\PermissionTrait;
+use OrangeHRM\Time\Traits\Service\ProjectServiceTrait;
 
 class SaveProjectController extends AbstractVueController
 {
     use PermissionTrait;
+    use ProjectServiceTrait;
 
     /**
      * @inheritDoc
@@ -36,8 +38,10 @@ class SaveProjectController extends AbstractVueController
     {
         if ($request->attributes->has('id')) {
             $component = new Component('project-edit');
-            // TODO: Get activity ids of this project that has been used in timesheets
-            $component->addProp(new Prop('unselectable-ids', Prop::TYPE_ARRAY, []));
+            $unselectableActivityIds = $this->getProjectService()
+                ->getProjectDao()
+                ->getActivityIdsOfProjectInTimesheetItems($request->attributes->getInt('id'));
+            $component->addProp(new Prop('unselectable-ids', Prop::TYPE_ARRAY, $unselectableActivityIds));
             $component->addProp(new Prop('project-id', Prop::TYPE_NUMBER, $request->attributes->getInt('id')));
         } else {
             $component = new Component('project-save');
