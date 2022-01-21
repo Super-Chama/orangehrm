@@ -19,65 +19,62 @@
 
 namespace OrangeHRM\Tests\Time\Api;
 
+use OrangeHRM\Config\Config;
 use OrangeHRM\Framework\Services;
 use OrangeHRM\Tests\Util\EndpointIntegrationTestCase;
 use OrangeHRM\Tests\Util\Integration\TestCaseParams;
-use OrangeHRM\Time\Api\TimesheetActionLogAPI;
+use OrangeHRM\Tests\Util\TestDataService;
+use OrangeHRM\Time\Api\TimeReportAPI;
 
 /**
  * @group Time
  * @group APIv2
  */
-class TimesheetActionLogAPITest extends EndpointIntegrationTestCase
+class ProjectActivityDetailedReportAPITest extends EndpointIntegrationTestCase
 {
-    protected function setUp(): void
-    {
-        $this->getEntityManager()->clear();
-    }
-
     /**
-     * @dataProvider dataProviderForTestGetAll
+     * @dataProvider dataProviderForTestGetOne
      */
-    public function testGetAll(TestCaseParams $testCaseParams): void
+    public function testGetOne(TestCaseParams $testCaseParams): void
     {
-        $this->populateFixtures('TimesheetActionLogDao.yml');
+        TestDataService::populate(Config::get(Config::TEST_DIR) . '/phpunit/fixtures/DataGroupPermission.yaml', true);
+        $this->populateFixtures('ProjectActivityDetailedReportAPITest.yaml', null, true);
         $this->createKernelWithMockServices([Services::AUTH_USER => $this->getMockAuthUser($testCaseParams)]);
         $this->registerServices($testCaseParams);
-        $this->registerMockDateTimeHelper($testCaseParams);
-        $api = $this->getApiEndpointMock(TimesheetActionLogAPI::class, $testCaseParams);
-        $this->assertValidTestCase($api, 'getAll', $testCaseParams);
+        $api = $this->getApiEndpointMock(TimeReportAPI::class, $testCaseParams);
+        $this->assertValidTestCase($api, 'getOne', $testCaseParams);
     }
 
-    public function dataProviderForTestGetAll(): array
+    public function dataProviderForTestGetOne(): array
     {
-        return $this->getTestCases('TimesheetActionLogTestCase.yaml', 'GetAll');
-    }
-
-    public function testCreate(): void
-    {
-        $api = new TimesheetActionLogAPI($this->getRequest());
-        $this->expectNotImplementedException();
-        $api->create();
-    }
-
-    public function testGetValidationRuleForCreate(): void
-    {
-        $api = new TimesheetActionLogAPI($this->getRequest());
-        $this->expectNotImplementedException();
-        $api->getValidationRuleForCreate();
+        return $this->getTestCases('ProjectActivityDetailedReportAPITestCase.yaml', 'GetOne');
     }
 
     public function testDelete(): void
     {
-        $api = new TimesheetActionLogAPI($this->getRequest());
+        $api = new TimeReportAPI($this->getRequest());
         $this->expectNotImplementedException();
         $api->delete();
     }
 
     public function testGetValidationRuleForDelete(): void
     {
-        $api = new TimesheetActionLogAPI($this->getRequest());
+        $api = new TimeReportAPI($this->getRequest());
         $this->expectNotImplementedException();
         $api->getValidationRuleForDelete();
+    }
+
+    public function testUpdate(): void
+    {
+        $api = new TimeReportAPI($this->getRequest());
+        $this->expectNotImplementedException();
+        $api->update();
+    }
+
+    public function testGetValidationRuleForUpdate(): void
+    {
+        $api = new TimeReportAPI($this->getRequest());
+        $this->expectNotImplementedException();
+        $api->getValidationRuleForUpdate();
     }
 }
