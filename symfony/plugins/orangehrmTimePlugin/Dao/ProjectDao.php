@@ -323,8 +323,8 @@ class ProjectDao extends BaseDao
         QueryBuilder $q
     ): QueryBuilderWrapper {
         if (!is_null($projectReportSearchFilterParams->getFromDate()) && !is_null(
-                $projectReportSearchFilterParams->getToDate()
-            )) {
+            $projectReportSearchFilterParams->getToDate()
+        )) {
             $q->andWhere($q->expr()->between('timesheetItem.date', ':fromDate', ':toDate'))
                 ->setParameter('fromDate', $projectReportSearchFilterParams->getFromDate())
                 ->setParameter('toDate', $projectReportSearchFilterParams->getToDate());
