@@ -27,7 +27,7 @@
       the database, database users, configuration file, etc
     </oxd-text>
     <br />
-    <oxd-text tag="h5" class="confirmation-text-header">Details</oxd-text>
+    <oxd-text class="confirmation-text-header">Details</oxd-text>
     <br />
     <oxd-text class="confirmation-text-section"> Host Name </oxd-text>
     <oxd-text class="confirmation-text-info">{{ database.dbHost }}</oxd-text>
@@ -131,6 +131,7 @@ export default {
 <style lang="scss" scoped>
 .confirmation-text-header {
   font-weight: 700;
+  font-size: 20px;
 }
 
 .confirmation-text-section {
