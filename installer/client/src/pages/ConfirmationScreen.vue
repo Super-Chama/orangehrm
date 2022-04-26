@@ -113,8 +113,8 @@ export default {
       .then((response) => {
         const {data} = response.data;
         this.adminUserName = data.username;
+        this.isLoading = false;
       });
-    this.isLoading = false;
   },
   methods: {
     onSubmit() {
