@@ -121,7 +121,7 @@ export default {
       navigate('/installer/process');
     },
     navigateUrl() {
-      navigate('/installer/instance-creation');
+      navigate('/installer/admin-user-creation');
     },
   },
 };
