@@ -5,8 +5,9 @@
     </oxd-text>
     <br />
     <oxd-text tag="p" class="orangehrm-installer-page-content">
-      You have sucessfully upgraded to OrangeHRM Starter version 5.0. Make sure
-      you go through the following steps before start using the system.
+      You have sucessfully upgraded to OrangeHRM Starter version
+      {{ productversion }}. Make sure you go through the following steps before
+      start using the system.
     </oxd-text>
 
     <ul class="orangehrm-upgrader-complete">
@@ -39,6 +40,12 @@
 import {navigate} from '@/core/util/helper/navigation.ts';
 export default {
   name: 'UpgraderCompleteScreen',
+  props: {
+    productversion: {
+      type: String,
+      required: true,
+    },
+  },
   methods: {
     launch() {
       navigate('/');
