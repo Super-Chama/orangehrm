@@ -27,7 +27,7 @@
       the database, database users, configuration file, etc
     </oxd-text>
     <br />
-    <oxd-text tag="h6" class="confirmation-text-header">Details</oxd-text>
+    <oxd-text tag="h5" class="confirmation-text-header">Details</oxd-text>
     <br />
     <oxd-text class="confirmation-text-section"> Host Name </oxd-text>
     <oxd-text class="confirmation-text-info">{{ database.dbHost }}</oxd-text>
@@ -99,23 +99,26 @@ export default {
     };
   },
   beforeMount() {
-    this.http.getAll().then((response) => {
-      const {data} = response.data;
-      this.database = {...databaseModel, ...data};
-    });
+    this.isLoading = true;
     this.http
-      .request({
-        method: 'GET',
-        url: '/installer/api/admin-user',
+      .getAll()
+      .then((response) => {
+        const {data} = response.data;
+        this.database = {...databaseModel, ...data};
+        return this.http.request({
+          method: 'GET',
+          url: '/installer/api/admin-user',
+        });
       })
       .then((response) => {
         const {data} = response.data;
         this.adminUserName = data.username;
       });
+    this.isLoading = false;
   },
   methods: {
     onSubmit() {
-      // TODO navigate to install page
+      navigate('/installer/process');
     },
     navigateUrl() {
       navigate('/installer/instance-creation');
@@ -128,7 +131,6 @@ export default {
 <style lang="scss" scoped>
 .confirmation-text-header {
   font-weight: 700;
-  font-size: 20px;
 }
 
 .confirmation-text-section {
