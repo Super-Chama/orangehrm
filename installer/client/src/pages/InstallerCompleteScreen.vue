@@ -24,8 +24,10 @@
     </oxd-text>
     <br />
     <oxd-text tag="p" class="orangehrm-installer-page-content">
-      OrangeHRM Starter Version 5.0 has been successfully installed.
+      OrangeHRM Starter Version {{ productversion }} has been successfully
+      installed.
     </oxd-text>
+    <br />
     <br />
     <oxd-button
       class="orangehrm-installer-complete-button"
@@ -40,6 +42,12 @@
 import {navigate} from '@/core/util/helper/navigation.ts';
 export default {
   name: 'InstallerCompleteScreen',
+  props: {
+    productversion: {
+      type: String,
+      required: true,
+    },
+  },
   methods: {
     launch() {
       navigate('/');
