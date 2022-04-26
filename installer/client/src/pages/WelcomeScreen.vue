@@ -115,7 +115,7 @@ export default {
       if (this.selected === 'upgrade') {
         navigate('/upgrader/database-config');
       } else {
-        navigate('/installer/database-config');
+        navigate('/installer/licence-acceptance');
       }
     },
   },
