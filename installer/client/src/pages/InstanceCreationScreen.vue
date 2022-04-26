@@ -27,6 +27,11 @@
       Instance Creation
     </oxd-text>
     <br />
+    <oxd-text tag="p" class="orangehrm-installer-page-content">
+      Fill in your organization details here. Details entered in this section
+      will be captured to create your OrangeHRM Instance
+    </oxd-text>
+    <br />
     <oxd-grid :cols="2" class="orangehrm-full-width-grid">
       <oxd-grid-item>
         <oxd-input-field
