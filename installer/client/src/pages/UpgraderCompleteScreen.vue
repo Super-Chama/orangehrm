@@ -7,7 +7,7 @@
     <oxd-text tag="p" class="orangehrm-installer-page-content">
       You have sucessfully upgraded to OrangeHRM Starter version
       {{ productversion }}. Make sure you go through the following steps before
-      start using the system.
+      using the system.
     </oxd-text>
 
     <ul class="orangehrm-upgrader-complete">
