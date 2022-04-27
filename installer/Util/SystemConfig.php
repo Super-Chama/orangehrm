@@ -23,7 +23,6 @@ use Exception;
 use OrangeHRM\Config\Config;
 use PDO;
 use Symfony\Component\Filesystem\Filesystem;
-use Symfony\Component\Yaml\Yaml;
 
 class SystemConfig
 {
@@ -53,9 +52,7 @@ class SystemConfig
     public function __construct()
     {
         $this->filesystem = new Filesystem();
-        $this->systemRequirements = Yaml::parseFile(
-            realpath(__DIR__ . '/../environmentCheck/system_requirements.yml')
-        );
+        $this->systemRequirements = require realpath(__DIR__ . '/../config/system_requirements.php');
     }
 
     /**

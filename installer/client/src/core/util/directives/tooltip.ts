@@ -1,4 +1,3 @@
-<?php
 /**
  * OrangeHRM is a comprehensive Human Resource Management (HRM) System that captures
  * all the essential functionalities required for any enterprise.
@@ -17,30 +16,22 @@
  * Boston, MA  02110-1301, USA
  */
 
-use OrangeHRM\Config\Config;
-use OrangeHRM\Framework\Framework;
-use OrangeHRM\Framework\Http\RedirectResponse;
-use OrangeHRM\Framework\Http\Request;
-use Symfony\Component\ErrorHandler\Debug;
+import {Directive, DirectiveBinding, h, render} from 'vue';
+import Icon from '@ohrm/oxd/core/components/Icon/Icon.vue';
 
-require realpath(__DIR__ . '/../src/vendor/autoload.php');
-
-$env = $_SERVER['APP_ENV'] ?? $_ENV['APP_ENV'] ?? $_SERVER['APP_ENV'] = $_ENV['APP_ENV'] = 'prod';
-$debug = (bool)($_SERVER['APP_DEBUG'] ?? $_ENV['APP_DEBUG'] ?? $_SERVER['APP_DEBUG'] = $_ENV['APP_DEBUG'] = ('prod' !== $env));
-
-if ($debug) {
-    umask(0000);
-    Debug::enable();
-}
-
-$kernel = new Framework($env, $debug);
-$request = Request::createFromGlobals();
-
-if (Config::isInstalled()) {
-    $response = $kernel->handleRequest($request);
-} else {
-    $response = new RedirectResponse('./../');
-}
-
-$response->send();
-$kernel->terminate($request, $response);
+const tooltipDirective: Directive = {
+  beforeMount(el: HTMLElement, binding: DirectiveBinding<string>) {
+    if (!el || el.children.length === 0) return;
+    const {value} = binding;
+    const node = h(Icon, {
+      name: 'info-circle-fill',
+      title: value,
+      style: {
+        marginLeft: '5px',
+        cursor: 'pointer',
+      },
+    });
+    render(node, el.children[0]);
+  },
+};
+export default tooltipDirective;
