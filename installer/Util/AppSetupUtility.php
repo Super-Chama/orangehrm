@@ -300,73 +300,13 @@ class AppSetupUtility
 
     public function insertInstanceIdentifierAndChecksum(): void
     {
-        list(
-            $organizationName,
-            $email,
-            $adminFirstName,
-            $adminLastName,
-            $host,
-            $country,
-            $ohrmVersion,
-            $currentTimestamp
-            ) = $this->getInstanceIdentifierData();
+        $instanceIdentifierData = $this->getInstanceIdentifierData();
 
-        $instanceIdentifer = $this->getSystemConfiguration()->createInstanceIdentifier(
-            $organizationName,
-            $email,
-            $adminFirstName,
-            $adminLastName,
-            $host,
-            $country,
-            $ohrmVersion,
-            $currentTimestamp
-        );
+        $instanceIdentifier = $this->getSystemConfiguration()->createInstanceIdentifier(...$instanceIdentifierData);
+        $instanceIdentifierChecksum = $this->getSystemConfiguration()->createInstanceIdentifierChecksum(...$instanceIdentifierData);
 
-        $instanceIdentiferChecksum = $this->getSystemConfiguration()->createInstanceIdentifierChecksum(
-            $organizationName,
-            $email,
-            $adminFirstName,
-            $adminLastName,
-            $host,
-            $country,
-            $ohrmVersion,
-            $currentTimestamp,
-        );
-
-        $this->insertInstanceIdentifier($instanceIdentifer);
-        $this->insertInstanceIdentifierChecksum($instanceIdentiferChecksum);
-    }
-
-    /**
-     * @param string $instanceIdentifier
-     */
-    private function insertInstanceIdentifier(string $instanceIdentifier): void
-    {
-        Connection::getConnection()->createQueryBuilder()
-            ->insert('hs_hr_config')
-            ->values([
-                'name' => ':instanceIdentifierName',
-                'value' => ':instanceIdentifierValue'
-            ])
-            ->setParameter('instanceIdentifierName', SystemConfiguration::INSTANCE_IDENTIFIER)
-            ->setParameter('instanceIdentifierValue', $instanceIdentifier)
-            ->executeQuery();
-    }
-
-    /**
-     * @param string $instanceIdentifierChecksum
-     */
-    private function insertInstanceIdentifierChecksum(string $instanceIdentifierChecksum): void
-    {
-        Connection::getConnection()->createQueryBuilder()
-            ->insert('hs_hr_config')
-            ->values([
-                'name' => ':instanceIdentifierChecksumName',
-                'value' => ':instanceIdentifierChecksumValue'
-            ])
-            ->setParameter('instanceIdentifierChecksumName', SystemConfiguration::INSTANCE_IDENTIFIER_CHECKSUM)
-            ->setParameter('instanceIdentifierChecksumValue', $instanceIdentifierChecksum)
-            ->executeQuery();
+        $this->getConfigHelper()->setConfigValue(SystemConfiguration::INSTANCE_IDENTIFIER, $instanceIdentifier);
+        $this->getConfigHelper()->setConfigValue(SystemConfiguration::INSTANCE_IDENTIFIER_CHECKSUM, $instanceIdentifierChecksum);
     }
 
     /**
