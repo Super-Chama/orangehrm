@@ -9,24 +9,6 @@
       {{ productversion }}. Make sure you go through the following steps before
       using the system.
     </oxd-text>
-
-    <ul class="orangehrm-upgrader-complete">
-      <li>
-        <oxd-text tag="span" class="orangehrm-installer-page-content">
-          If note were displayed under <b>Version Info,</b> make sure you
-          understand them throughly, You can find the notes at
-          <b>Upgrading/log/notes.log</b> in your OrangeHRM root folder.
-        </oxd-text>
-      </li>
-      <li>
-        <oxd-text tag="span" class="orangehrm-installer-page-content">
-          After going through the manual steps mentioned in the notes (if there
-          are any), do a full round of data verification to see whether data
-          from previous version has been imported properly.
-        </oxd-text>
-      </li>
-    </ul>
-
     <oxd-button
       class="orangehrm-upgrader-complete-button"
       display-type="secondary"
@@ -59,11 +41,9 @@ export default {
 .orangehrm-upgrader-complete {
   padding: 0 1rem;
   color: $oxd-interface-gray-darken-1-color;
-  li {
-    padding-bottom: 0.75rem;
-  }
 }
 .orangehrm-upgrader-complete-button {
+  margin-top: 1rem;
   margin-right: auto;
 }
 </style>

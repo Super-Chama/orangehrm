@@ -248,7 +248,7 @@ class SystemConfig
         foreach ($supportedWebServers as $supportedWebServer) {
             if (strpos($currentWebServer, $supportedWebServer) !== false) {
                 return [
-                    'message' => Messages::WEB_SERVER_OK_MESSAGE . "(ver ${currentWebServer})",
+                    'message' => Messages::STATUS_OK . "(ver ${currentWebServer})",
                     'status' => self::PASSED
                 ];
             }
@@ -272,13 +272,13 @@ class SystemConfig
     {
         if ($this->checkWritePermission(realpath(__DIR__ . '/../../lib/confs'))) {
             return [
-                'message' => Messages::WRITABLE_LIB_CONF_OK_MESSAGE,
+                'message' => Messages::WRITEABLE,
                 'status' => self::PASSED
             ];
         } else {
             $this->interruptContinue = true;
             return [
-                'message' => Messages::WRITABLE_LIB_CONF_FAIL_MESSAGE,
+                'message' => Messages::NOT_WRITEABLE,
                 'status' => self::BLOCKER
             ];
         }
@@ -292,13 +292,13 @@ class SystemConfig
     {
         if ($this->checkWritePermission(realpath(__DIR__ . '/../../src/config'))) {
             return [
-                'message' => Messages::WRITEABLE_SRC_CONFIG_OK_MESSAGE,
+                'message' => Messages::WRITEABLE,
                 'status' => self::PASSED
             ];
         } else {
             $this->interruptContinue = true;
             return [
-                'message' => Messages::WRITEABLE_SRC_CONFIG_FAIL_MESSAGE,
+                'message' => Messages::NOT_WRITEABLE,
                 'status' => self::BLOCKER
             ];
         }
@@ -312,13 +312,13 @@ class SystemConfig
     {
         if ($this->checkWritePermission(Config::get(Config::CACHE_DIR))) {
             return [
-                'message' => Messages::WRITEABLE_SRC_CACHE_OK_MESSAGE,
+                'message' => Messages::WRITEABLE,
                 'status' => self::PASSED
             ];
         } else {
             $this->interruptContinue = true;
             return [
-                'message' => Messages::WRITEABLE_SRC_CACHE_FAIL_MESSAGE,
+                'message' => Messages::NOT_WRITEABLE,
                 'status' => self::BLOCKER
             ];
         }
@@ -332,13 +332,13 @@ class SystemConfig
     {
         if ($this->checkWritePermission(Config::get(Config::LOG_DIR))) {
             return [
-                'message' => Messages::WRITEABLE_SRC_LOG_OK_MESSAGE,
+                'message' => Messages::WRITEABLE,
                 'status' => self::PASSED
             ];
         } else {
             $this->interruptContinue = true;
             return [
-                'message' => Messages::WRITEABLE_SRC_LOG_FAIL_MESSAGE,
+                'message' => Messages::NOT_WRITEABLE,
                 'status' => self::BLOCKER
             ];
         }
@@ -390,7 +390,7 @@ class SystemConfig
             ];
         } else {
             return [
-                'message' => Messages::REGISTER_GLOBALS_OFF_OK_MESSAGE,
+                'message' => Messages::STATUS_OK,
                 'status' => self::PASSED
             ];
         }
@@ -446,13 +446,13 @@ class SystemConfig
     {
         if (extension_loaded('curl')) {
             return [
-                'message' => Messages::CURL_STATUS_OK_MESSAGE,
+                'message' => Messages::ENABLED,
                 'status' => self::PASSED
             ];
         } else {
             $this->interruptContinue = true;
             return [
-                'message' => Messages::CURL_STATUS_DISABLE_MESSAGE,
+                'message' => Messages::DISABLED,
                 'status' => self::BLOCKER
             ];
         }
@@ -466,13 +466,13 @@ class SystemConfig
     {
         if (extension_loaded('SimpleXML') && extension_loaded('libxml') && extension_loaded('xml')) {
             return [
-                'message' => Messages::SIMPLE_XML_STATUS_OK_MESSAGE,
+                'message' => Messages::ENABLED,
                 'status' => self::PASSED
             ];
         } else {
             $this->interruptContinue = true;
             return [
-                'message' => Messages::SIMPLE_XML_STATUS_DISABLE_MESSAGE,
+                'message' => Messages::DISABLED,
                 'status' => self::BLOCKER
             ];
         }
@@ -486,13 +486,13 @@ class SystemConfig
     {
         if (extension_loaded('zip')) {
             return [
-                'message' => Messages::ZIP_STATUS_OK_MESSAGE,
+                'message' => Messages::ENABLED,
                 'status' => self::PASSED
             ];
         } else {
             $this->interruptContinue = true;
             return [
-                'message' => Messages::ZIP_STATUS_DISABLE_MESSAGE,
+                'message' => Messages::DISABLED,
                 'status' => self::BLOCKER
             ];
         }
