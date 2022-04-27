@@ -34,7 +34,7 @@ class CleanUpInstallAPI extends AbstractInstallerRestController
         $appSetupUtility = new AppSetupUtility();
 
         if (StateContainer::getInstance()->getDbType() === AppSetupUtility::INSTALLATION_DB_TYPE_NEW) {
-            $appSetupUtility->dropDatabaseOnFailure();
+            $appSetupUtility->dropDatabase();
         } else {
             $appSetupUtility->cleanUpInstallOnFailure();
         }

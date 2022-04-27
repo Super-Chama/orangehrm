@@ -418,7 +418,7 @@ class AppSetupUtility
         Connection::getConnection()->executeStatement('SET FOREIGN_KEY_CHECKS=1;');
     }
 
-    public function dropDatabaseOnFailure(): void
+    public function dropDatabase(): void
     {
         $dbName = StateContainer::getInstance()->getDbInfo()[StateContainer::DB_NAME];
         Connection::getConnection()->createSchemaManager()->dropDatabase($dbName);
