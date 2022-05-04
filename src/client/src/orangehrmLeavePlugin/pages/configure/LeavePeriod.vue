@@ -94,9 +94,9 @@
 import {APIService} from '@ohrm/core/util/services/api.service';
 import {reloadPage} from '@ohrm/core/util/helper/navigation';
 import {required} from '@/core/util/validation/rules';
-import {enGB} from 'date-fns/locale';
 import {addDays, formatDate, parseDate} from '@/core/util/helper/datefns';
 import useDateFormat from '@/core/util/composable/useDateFormat';
+import useLocale from '@/core/util/composable/useLocale';
 
 const leavePeriodModel = {
   startMonth: null,
@@ -118,9 +118,11 @@ export default {
       '/api/v2/leave/leave-period',
     );
     const {jsDateFormat} = useDateFormat();
+    const {locale} = useLocale();
     return {
       http,
       jsDateFormat,
+      locale,
     };
   },
 
@@ -143,7 +145,7 @@ export default {
         .map((...[, index]) => {
           return {
             id: index + 1,
-            label: enGB.localize.month(index, {
+            label: this.locale.localize.month(index, {
               width: 'wide',
             }),
           };

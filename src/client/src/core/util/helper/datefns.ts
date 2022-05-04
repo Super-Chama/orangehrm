@@ -11,6 +11,7 @@ import {
   differenceInSeconds,
   differenceInCalendarDays,
 } from 'date-fns';
+import useLocale from '@/core/util/composable/useLocale';
 
 const defaultTimezones = [
   {
@@ -123,13 +124,17 @@ const defaultTimezones = [
   },
 ];
 
+let locale: Locale;
 const freshDate = () => {
   return new Date(new Date().setHours(0, 0, 0, 0));
 };
 
 const parseDate = (value: string, dateFormat = 'yyyy-MM-dd'): Date | null => {
   try {
-    const parsed = parse(value, dateFormat, freshDate());
+    if (!locale) {
+      locale = useLocale().locale;
+    }
+    const parsed = parse(value, dateFormat, freshDate(), {locale});
     return !isNaN(parsed.valueOf()) ? parsed : null;
   } catch (error) {
     return null;
@@ -138,7 +143,10 @@ const parseDate = (value: string, dateFormat = 'yyyy-MM-dd'): Date | null => {
 
 const formatDate = (value: Date, dateFormat: string): string | null => {
   try {
-    return format(value, dateFormat);
+    if (!locale) {
+      locale = useLocale().locale;
+    }
+    return format(value, dateFormat, {locale});
   } catch (error) {
     return null;
   }
