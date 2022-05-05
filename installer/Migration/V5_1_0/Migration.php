@@ -25,7 +25,6 @@ use OrangeHRM\Installer\Util\V1\AbstractMigration;
 class Migration extends AbstractMigration
 {
     protected ?LangStringHelper $langStringHelper = null;
-
     protected ?TranslationHelper $translationHelper = null;
 
     public function up(): void

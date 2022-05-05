@@ -78,7 +78,6 @@ class AddLanguageStrings
         return $q->executeQuery()->fetchOne();
     }
 
-
     /**
      * @param int $groupId
      * @return array
@@ -94,12 +93,10 @@ class AddLanguageStrings
         return array_column($results, 'id');
     }
 
-
     /**
      * @param string $groupName
-     * @return void
      */
-    public function insertOrUpdateLangStrings(string $groupName)
+    public function insertOrUpdateLangStrings(string $groupName): void
     {
         $langStringArray = $this->getLangHelper()->readLangStrings(
             "installer/Migration/V5_1_0/lang-string/" . $groupName . ".yaml",
@@ -138,10 +135,8 @@ class AddLanguageStrings
         return null;
     }
 
-
     /**
      * @param LangString $langString
-     * @return void
      */
     private function saveLangString(LangString $langString): void
     {
@@ -165,7 +160,6 @@ class AddLanguageStrings
     /**
      * @param int $langStringId
      * @param LangString $langString
-     * @return void
      */
     private function updateLangString(int $langStringId, LangString $langString): void
     {

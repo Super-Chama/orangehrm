@@ -80,7 +80,6 @@ class LangStringHelper
 
     /**
      * @param string $groupName
-     * @return void
      */
     public function deleteNonCustomizedLangStrings(string $groupName): void
     {
@@ -131,7 +130,7 @@ class LangStringHelper
             ->setParameter('module', $groupId);
         $results = $q->executeQuery()->fetchAllAssociative();
         $customStrings = array_column($results, 'lang_string_id');
-        if ($customStrings == null) {
+        if (empty($customStrings)) {
             return $this->getLangStringIdsForGroup($groupId);
         }
 
@@ -148,9 +147,8 @@ class LangStringHelper
 
     /**
      * @param string $groupName
-     * @return void
      */
-    public function insertOrUpdateLangStrings(string $groupName)
+    public function insertOrUpdateLangStrings(string $groupName): void
     {
         $langStringArray = $this->getLangHelper()->readLangStrings(
             realpath(__DIR__ . "/lang-string/$groupName.yaml"),
@@ -183,10 +181,8 @@ class LangStringHelper
                 ->setParameter('module', $groupId);
         }
 
-        if (false != $result = $q->executeQuery()->fetchOne()) {
-            return $result;
-        }
-        return null;
+        $result = $q->executeQuery()->fetchOne();
+        return $result ? $result : null;
     }
 
     /**
@@ -211,7 +207,6 @@ class LangStringHelper
 
     /**
      * @param LangString $langString
-     * @return void
      */
     private function saveLangString(LangString $langString): void
     {
@@ -235,7 +230,6 @@ class LangStringHelper
     /**
      * @param int $langStringId
      * @param LangString $langString
-     * @return void
      */
     private function updateLangString(int $langStringId, LangString $langString): void
     {
