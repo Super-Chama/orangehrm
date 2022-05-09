@@ -73,6 +73,8 @@ import AttendancePages from '@/orangehrmAttendancePlugin';
 import MaintenancePages from '@/orangehrmMaintenancePlugin';
 import PerformancePages from '@/orangehrmPerformancePlugin';
 
+import CoperateBranding from '@/orangehrmAdminPlugin/pages/CoperateBranding.vue';
+
 export default {
   'job-title-list': JobTitle,
   'job-title-edit': EditJobTitle,
@@ -131,4 +133,5 @@ export default {
   ...AttendancePages,
   ...MaintenancePages,
   ...PerformancePages,
+  'coperate-branding': CoperateBranding,
 };
