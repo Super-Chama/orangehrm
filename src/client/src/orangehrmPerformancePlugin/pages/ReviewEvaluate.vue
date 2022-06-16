@@ -172,11 +172,4 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-.orangehrm-performance-review {
-  &-title {
-    font-size: 14px;
-    font-weight: 800;
-  }
-}
-</style>
+<style src="./review-evaluate.scss" lang="scss" scoped></style>

@@ -376,6 +376,7 @@ export default {
         if (row.statusId === 4) {
           cellConfig.view = viewIcon;
           cellConfig.view.props.title = this.$t('general.view');
+          cellConfig.view.onClick = this.onClickEvaluate;
         } else if (row.statusId === 1) {
           cellConfig.edit = editIcon;
           cellConfig.edit.props.title = this.$t('general.edit');
@@ -389,6 +390,7 @@ export default {
         if (row.statusId === 4) {
           cellConfig.view = viewLabel;
           cellConfig.view.props.label = this.$t('general.view');
+          cellConfig.view.onClick = this.onClickEvaluate;
         } else if (row.statusId === 1) {
           cellConfig.edit = editLabel;
           cellConfig.edit.props.label = this.$t('general.edit');

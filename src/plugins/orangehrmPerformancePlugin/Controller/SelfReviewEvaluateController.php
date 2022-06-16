@@ -19,18 +19,14 @@
 
 namespace OrangeHRM\Performance\Controller;
 
-use OrangeHRM\Core\Authorization\Controller\CapableViewController;
-use OrangeHRM\Core\Controller\AbstractVueController;
 use OrangeHRM\Core\Controller\Common\NoRecordsFoundController;
 use OrangeHRM\Core\Controller\Exception\RequestForwardableException;
 use OrangeHRM\Core\Traits\UserRoleManagerTrait;
 use OrangeHRM\Core\Vue\Component;
-use OrangeHRM\Core\Vue\Prop;
-use OrangeHRM\Entity\PerformanceReview;
 use OrangeHRM\Framework\Http\Request;
 use OrangeHRM\Performance\Traits\Service\PerformanceReviewServiceTrait;
 
-class ReviewEvaluateController extends AbstractVueController implements CapableViewController
+class SelfReviewEvaluateController extends ReviewEvaluateController
 {
     use PerformanceReviewServiceTrait;
     use UserRoleManagerTrait;
@@ -41,7 +37,7 @@ class ReviewEvaluateController extends AbstractVueController implements CapableV
     public function preRender(Request $request): void
     {
         $id = $request->attributes->getInt('id');
-        $component = new Component('review-evaluate');
+        $component = new Component('self-review-evaluate');
 
         $review = $this->getPerformanceReviewService()->getPerformanceReviewDao()->getPerformanceReviewById($id);
         if (!is_null($review)) {
@@ -56,25 +52,10 @@ class ReviewEvaluateController extends AbstractVueController implements CapableV
     public function isCapable(Request $request): bool
     {
         $id = $request->attributes->getInt('id');
-        if (is_null($this->getPerformanceReviewService()->getPerformanceReviewDao()->getPerformanceReviewById($id))) {
+        $review = $this->getPerformanceReviewService()->getPerformanceReviewDao()->getPerformanceReviewById($id);
+        if (is_null($review)) {
             throw new RequestForwardableException(NoRecordsFoundController::class . '::handle');
         }
-        return $this->getUserRoleManager()->isEntityAccessible(PerformanceReview::class, $id, null, ['ESS']);
-    }
-
-    /**
-     * @param Component $component
-     * @param PerformanceReview $performanceReview
-     */
-    protected function setReviewProps(Component $component, PerformanceReview $performanceReview): void
-    {
-        $component->addProp(new Prop('review-id', Prop::TYPE_NUMBER, $performanceReview->getId()));
-        $component->addProp(new Prop('emp-number', Prop::TYPE_NUMBER, $performanceReview->getEmployee()->getEmpNumber()));
-        $component->addProp(new Prop('employee-name', Prop::TYPE_STRING, $performanceReview->getEmployee()->getDecorator()->getFirstAndLastNames()));
-        $component->addProp(new Prop('job-title', Prop::TYPE_STRING, $performanceReview->getEmployee()->getJobTitle()->getJobTitleName()));
-        $component->addProp(new Prop('status', Prop::TYPE_NUMBER, $performanceReview->getStatusId()));
-        $component->addProp(new Prop('review-period-start', Prop::TYPE_STRING, $performanceReview->getDecorator()->getReviewPeriodStart()));
-        $component->addProp(new Prop('review-period-end', Prop::TYPE_STRING, $performanceReview->getDecorator()->getReviewPeriodEnd()));
-        $component->addProp(new Prop('due-date', Prop::TYPE_STRING, $performanceReview->getDecorator()->getDueDate()));
+        return $this->getUserRoleManagerHelper()->isSelfByEmpNumber($review->getEmployee()->getEmpNumber());
     }
 }
