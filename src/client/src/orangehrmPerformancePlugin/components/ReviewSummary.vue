@@ -126,9 +126,9 @@ export default {
 
     const imgSrc = `${window.appGlobal.baseUrl}/pim/viewPhoto/empNumber/${props.empNumber}`;
     const reviewStatus = statusOpts.find(el => el.id === props.status).label;
-    const reviewPeriod = `${reviewDateFormat(props.reviewPeriodStart)} - ${
-      props.reviewPeriodEnd
-    }`;
+    const reviewPeriod = `${reviewDateFormat(
+      props.reviewPeriodStart,
+    )} - ${reviewDateFormat(props.reviewPeriodEnd)}`;
     const reviewDueDate = reviewDateFormat(props.dueDate);
 
     return {

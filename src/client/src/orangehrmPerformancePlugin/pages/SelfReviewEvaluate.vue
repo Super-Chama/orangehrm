@@ -35,16 +35,56 @@
       :review-period-end="reviewPeriodEnd"
       :due-date="dueDate"
     />
+    <br />
+    <div class="orangehrm-card-container">
+      <oxd-form :loading="isLoading">
+        <oxd-divider />
+        <final-evaulation
+          v-show="completed"
+          :status="status"
+          :final-comment="finalComment"
+          :final-rating="finalRating"
+          :completed-date="completedDate"
+        />
+        <oxd-divider />
+        <oxd-form-actions>
+          <oxd-button
+            display-type="ghost"
+            :label="$t('general.back')"
+            @click="onClickBack"
+          />
+          <oxd-button
+            v-show="!completed"
+            display-type="ghost"
+            class="orangehrm-left-space"
+            :label="$t('general.save')"
+            @click="onClickSave(false)"
+          />
+          <oxd-button
+            v-show="!completed"
+            display-type="secondary"
+            class="orangehrm-left-space"
+            :label="$t('performance.complete')"
+            type="submit"
+          />
+        </oxd-form-actions>
+      </oxd-form>
+    </div>
   </div>
 </template>
 
 <script>
+import {computed} from 'vue';
+import {navigate} from '@/core/util/helper/navigation';
+import {APIService} from '@/core/util/services/api.service';
 import ReviewSummary from '../components/ReviewSummary';
+import FinalEvaluation from '../components/FinalEvaluation';
 
 export default {
   name: 'SelfReviewEvaluate',
   components: {
     'review-summary': ReviewSummary,
+    'final-evaulation': FinalEvaluation,
   },
   props: {
     reviewId: {
@@ -78,6 +118,48 @@ export default {
     dueDate: {
       type: String,
       required: true,
+    },
+  },
+  setup(props) {
+    const http = new APIService(window.appGlobal.baseUrl, '');
+    // TODO workflow
+    const completed = computed(() => props.status === 4);
+
+    return {
+      http,
+      completed,
+    };
+  },
+  data() {
+    return {
+      isLoading: false,
+      completedDate: null,
+      finalRating: null,
+      finalComment: null,
+    };
+  },
+  beforeMount() {
+    if (this.completed) {
+      this.isLoading = true;
+      this.http
+        .request({
+          method: 'GET',
+          url: `/api/v2/performance/reviews/${this.reviewId}/evaluation/final`,
+        })
+        .then(response => {
+          const {data} = response.data;
+          this.completedDate = data.completedDate;
+          this.finalRating = data.finalRating;
+          this.finalComment = data.finalComment;
+        })
+        .finally(() => {
+          this.isLoading = false;
+        });
+    }
+  },
+  methods: {
+    onClickBack() {
+      navigate('/performance/myPerformanceReview');
     },
   },
 };

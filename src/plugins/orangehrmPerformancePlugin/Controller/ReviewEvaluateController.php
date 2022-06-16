@@ -46,6 +46,9 @@ class ReviewEvaluateController extends AbstractVueController implements CapableV
         $review = $this->getPerformanceReviewService()->getPerformanceReviewDao()->getPerformanceReviewById($id);
         if (!is_null($review)) {
             $this->setReviewProps($component, $review);
+            if ($this->isUserPerformanceReviewEvaluator($id)) {
+                $component->addProp(new Prop('is-reviewer', Prop::TYPE_BOOLEAN, true));
+            }
         }
         $this->setComponent($component);
     }
@@ -76,5 +79,20 @@ class ReviewEvaluateController extends AbstractVueController implements CapableV
         $component->addProp(new Prop('review-period-start', Prop::TYPE_STRING, $performanceReview->getDecorator()->getReviewPeriodStart()));
         $component->addProp(new Prop('review-period-end', Prop::TYPE_STRING, $performanceReview->getDecorator()->getReviewPeriodEnd()));
         $component->addProp(new Prop('due-date', Prop::TYPE_STRING, $performanceReview->getDecorator()->getDueDate()));
+    }
+
+    /**
+     * @param int $performanceReviewId
+     * @return bool
+     */
+    private function isUserPerformanceReviewEvaluator(int $performanceReviewId): bool
+    {
+        return $this->getUserRoleManager()->isEntityAccessible(
+            PerformanceReview::class,
+            $performanceReviewId,
+            null,
+            ['Admin', 'ESS'],
+            ['Supervisor']
+        );
     }
 }

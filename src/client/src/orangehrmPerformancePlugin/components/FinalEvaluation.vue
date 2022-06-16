@@ -29,33 +29,42 @@
           {{ $t('performance.date_of_completion') }}
         </oxd-text>
         <date-input
+          v-if="editable"
           :model-value="completedDate"
-          :readonly="readOnly"
           :rules="rules.completedDate"
           @update:modelValue="$emit('update:completedDate', $event)"
         />
+        <div v-else class="orangehrm-performance-review-final-read">
+          <oxd-text>{{ formattedCompletedDate }}</oxd-text>
+        </div>
       </div>
       <div class="orangehrm-performance-review-final-rating">
         <oxd-text class="orangehrm-performance-review-bold">
           {{ $t('performance.final_rating') }}
         </oxd-text>
         <oxd-input-field
+          v-if="editable"
           :model-value="finalRating"
-          :readonly="readOnly"
           :rules="rules.finalRating"
           @update:modelValue="$emit('update:finalRating', $event)"
         />
+        <div v-else class="orangehrm-performance-review-final-read">
+          <oxd-text>{{ finalRating }}</oxd-text>
+        </div>
       </div>
       <div class="orangehrm-performance-review-final-comment">
         <oxd-text class="orangehrm-performance-review-bold">
           {{ $t('performance.final_comments') }}
         </oxd-text>
         <oxd-input-field
+          v-if="editable"
           :model-value="finalComment"
-          :readonly="readOnly"
           :rules="rules.finalComment"
           @update:modelValue="$emit('update:finalComment', $event)"
         />
+        <div v-else class="orangehrm-performance-review-final-read">
+          <oxd-text>{{ finalComment }}</oxd-text>
+        </div>
       </div>
     </div>
   </div>
@@ -63,6 +72,9 @@
 
 <script>
 import {computed} from 'vue';
+import {formatDate, parseDate} from '@/core/util/helper/datefns';
+import useDateFormat from '@/core/util/composable/useDateFormat';
+import useLocale from '@/core/util/composable/useLocale';
 import {
   digitsOnlyWithDecimalPoint,
   required,
@@ -91,10 +103,17 @@ export default {
   },
   emits: ['update:finalRating', 'update:finalComment', 'update:completedDate'],
   setup(props) {
-    const readOnly = computed(() => props.status === 4);
+    const {jsDateFormat} = useDateFormat();
+    const {locale} = useLocale();
+
+    const editable = computed(() => props.status !== 4);
+    const formattedCompletedDate = computed(() =>
+      formatDate(parseDate(props.completedDate), jsDateFormat, {locale}),
+    );
 
     return {
-      readOnly,
+      editable,
+      formattedCompletedDate,
     };
   },
   data() {
@@ -142,6 +161,10 @@ export default {
 
     &-comment {
       width: 65%;
+    }
+
+    &-read {
+      margin-top: 1.2rem;
     }
   }
 }

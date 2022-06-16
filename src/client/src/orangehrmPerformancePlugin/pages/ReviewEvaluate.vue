@@ -47,14 +47,20 @@
         />
         <oxd-divider />
         <oxd-form-actions>
-          <oxd-button display-type="ghost" :label="$t('general.back')" />
           <oxd-button
+            display-type="ghost"
+            :label="$t('general.back')"
+            @click="onClickBack"
+          />
+          <oxd-button
+            v-show="!completed"
             display-type="ghost"
             class="orangehrm-left-space"
             :label="$t('general.save')"
             @click="onClickSave(false)"
           />
           <oxd-button
+            v-show="!completed"
             display-type="secondary"
             class="orangehrm-left-space"
             :label="$t('performance.complete')"
@@ -67,8 +73,9 @@
 </template>
 
 <script>
+import {computed} from 'vue';
 import {APIService} from '@/core/util/services/api.service';
-import {reloadPage} from '@/core/util/helper/navigation';
+import {navigate, reloadPage} from '@/core/util/helper/navigation';
 import Divider from '@ohrm/oxd/core/components/Divider/Divider.vue';
 import ReviewSummary from '../components/ReviewSummary';
 import FinalEvaluation from '../components/FinalEvaluation';
@@ -113,18 +120,24 @@ export default {
       type: String,
       required: true,
     },
+    isReviewer: {
+      type: Boolean,
+      default: false,
+    },
   },
-  setup() {
+  setup(props) {
     const http = new APIService(window.appGlobal.baseUrl, '');
+    // TODO workflow
+    const completed = computed(() => props.status === 4);
 
     return {
       http,
+      completed,
     };
   },
   data() {
     return {
       isLoading: false,
-      required: false,
       completedDate: null,
       finalRating: null,
       finalComment: null,
@@ -167,6 +180,13 @@ export default {
         .finally(() => {
           reloadPage();
         });
+    },
+    onClickBack() {
+      navigate(
+        this.isReviewer
+          ? '/performance/searchEvaluatePerformancReview'
+          : '/performance/searchPerformanceReview',
+      );
     },
   },
 };
