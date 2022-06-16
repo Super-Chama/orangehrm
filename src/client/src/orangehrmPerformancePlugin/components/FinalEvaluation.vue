@@ -1,33 +1,33 @@
 <!--
-  - OrangeHRM is a comprehensive Human Resource Management (HRM) System that captures
-  - all the essential functionalities required for any enterprise.
-  - Copyright (C) 2006 OrangeHRM Inc., http://www.orangehrm.com
-  -
-  - OrangeHRM is free software; you can redistribute it and/or modify it under the terms of
-  - the GNU General Public License as published by the Free Software Foundation; either
-  - version 2 of the License, or (at your option) any later version.
-  -
-  - OrangeHRM is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
-  - without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-  - See the GNU General Public License for more details.
-  -
-  - You should have received a copy of the GNU General Public License along with this program;
-  - if not, write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
-  - Boston, MA  02110-1301, USA
-  -->
+/**
+ * OrangeHRM is a comprehensive Human Resource Management (HRM) System that captures
+ * all the essential functionalities required for any enterprise.
+ * Copyright (C) 2006 OrangeHRM Inc., http://www.orangehrm.com
+ *
+ * OrangeHRM is free software; you can redistribute it and/or modify it under the terms of
+ * the GNU General Public License as published by the Free Software Foundation; either
+ * version 2 of the License, or (at your option) any later version.
+ *
+ * OrangeHRM is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along with this program;
+ * if not, write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
+ * Boston, MA  02110-1301, USA
+ */
+ -->
 
 <template>
   <div>
     <oxd-text class="orangehrm-performance-review-title">
-      Review Finalization
-      <!-- TODO localize -->
+      {{ $t('performance.review_finalization') }}
     </oxd-text>
     <div class="orangehrm-performance-review-final">
       <div class="orangehrm-performance-review-final-date">
         <oxd-text class="orangehrm-performance-review-bold">
-          Date of Completion
+          {{ $t('performance.date_of_completion') }}
         </oxd-text>
-        <!-- TODO localize -->
         <date-input
           :model-value="completedDate"
           :readonly="readOnly"
@@ -37,9 +37,8 @@
       </div>
       <div class="orangehrm-performance-review-final-rating">
         <oxd-text class="orangehrm-performance-review-bold">
-          Final Rating
+          {{ $t('performance.final_rating') }}
         </oxd-text>
-        <!-- TODO localize -->
         <oxd-input-field
           :model-value="finalRating"
           :readonly="readOnly"
@@ -49,9 +48,8 @@
       </div>
       <div class="orangehrm-performance-review-final-comment">
         <oxd-text class="orangehrm-performance-review-bold">
-          Final Comments
+          {{ $t('performance.final_comments') }}
         </oxd-text>
-        <!-- TODO localize -->
         <oxd-input-field
           :model-value="finalComment"
           :readonly="readOnly"

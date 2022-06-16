@@ -1,34 +1,34 @@
 <!--
-  - OrangeHRM is a comprehensive Human Resource Management (HRM) System that captures
-  - all the essential functionalities required for any enterprise.
-  - Copyright (C) 2006 OrangeHRM Inc., http://www.orangehrm.com
-  -
-  - OrangeHRM is free software; you can redistribute it and/or modify it under the terms of
-  - the GNU General Public License as published by the Free Software Foundation; either
-  - version 2 of the License, or (at your option) any later version.
-  -
-  - OrangeHRM is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
-  - without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-  - See the GNU General Public License for more details.
-  -
-  - You should have received a copy of the GNU General Public License along with this program;
-  - if not, write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
-  - Boston, MA  02110-1301, USA
-  -->
+/**
+ * OrangeHRM is a comprehensive Human Resource Management (HRM) System that captures
+ * all the essential functionalities required for any enterprise.
+ * Copyright (C) 2006 OrangeHRM Inc., http://www.orangehrm.com
+ *
+ * OrangeHRM is free software; you can redistribute it and/or modify it under the terms of
+ * the GNU General Public License as published by the Free Software Foundation; either
+ * version 2 of the License, or (at your option) any later version.
+ *
+ * OrangeHRM is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along with this program;
+ * if not, write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
+ * Boston, MA  02110-1301, USA
+ */
+ -->
 
 <template>
   <div class="orangehrm-background-container">
     <div class="orangehrm-card-container">
       <oxd-text tag="h5" class="orangehrm-performance-review-title">
-        Performance Review
-        <!-- TODO localize -->
+        {{ $t('performance.performance_review') }}
       </oxd-text>
     </div>
     <br />
     <div class="orangehrm-card-container">
       <oxd-text tag="h5" class="orangehrm-performance-review-title">
-        Review Summary
-        <!-- TODO localize -->
+        {{ $t('performance.review_summary') }}
       </oxd-text>
       <div class="orangehrm-performance-review-owner">
         <img alt="profile picture" class="employee-image" :src="imgSrc" />
@@ -51,22 +51,25 @@
       </div>
       <div class="orangehrm-performance-review-details">
         <div class="orangehrm-performance-review-details-column">
-          <oxd-text type="subtitle-2">Review Status</oxd-text>
-          <!-- TODO localize -->
+          <oxd-text type="subtitle-2">
+            {{ $t('performance.review_status') }}
+          </oxd-text>
           <oxd-text class="orangehrm-performance-review-bold">
             {{ reviewStatus }}
           </oxd-text>
         </div>
         <div class="orangehrm-performance-review-details-column">
-          <oxd-text type="subtitle-2">Review Period</oxd-text>
-          <!-- TODO localize -->
+          <oxd-text type="subtitle-2">
+            {{ $t('performance.review_period') }}
+          </oxd-text>
           <oxd-text class="orangehrm-performance-review-bold">
             {{ reviewPeriod }}
           </oxd-text>
         </div>
         <div class="orangehrm-performance-review-details-column">
-          <oxd-text type="subtitle-2">Review Due Date</oxd-text>
-          <!-- TODO localize -->
+          <oxd-text type="subtitle-2">
+            {{ $t('performance.review_due_date') }}
+          </oxd-text>
           <oxd-text class="orangehrm-performance-review-bold">
             {{ reviewDueDate }}
           </oxd-text>
@@ -95,10 +98,9 @@
           <oxd-button
             display-type="secondary"
             class="orangehrm-left-space"
-            label="Complete"
+            :label="$t('performance.complete')"
             type="submit"
           />
-          <!-- TODO localize -->
         </oxd-form-actions>
       </oxd-form>
     </div>
