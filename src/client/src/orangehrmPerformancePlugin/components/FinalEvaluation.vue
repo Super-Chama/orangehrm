@@ -76,9 +76,10 @@ import {formatDate, parseDate} from '@/core/util/helper/datefns';
 import useDateFormat from '@/core/util/composable/useDateFormat';
 import useLocale from '@/core/util/composable/useLocale';
 import {
-  digitsOnlyWithDecimalPoint,
   required,
   validDateFormat,
+  greaterThanOrEqual,
+  lessThanOrEqual,
 } from '@/core/util/validation/rules';
 
 export default {
@@ -120,7 +121,17 @@ export default {
     return {
       rules: {
         completedDate: [required, validDateFormat()],
-        finalRating: [required, digitsOnlyWithDecimalPoint],
+        finalRating: [
+          required,
+          greaterThanOrEqual(
+            0,
+            this.$t('performance.rating_should_be_greater_than_or_equal_to_0'),
+          ),
+          lessThanOrEqual(
+            100,
+            this.$t('performance.rating_should_be_less_than_or_equal_to_100'),
+          ),
+        ],
         // TODO add min max rules
         finalComment: [required],
       },

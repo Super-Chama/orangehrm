@@ -191,3 +191,9 @@ langStrings:
   -
     value: 'Final Comments'
     unitId: final_comments
+  -
+    value: 'Rating should be greater than or equal to 0'
+    unitId: rating_should_be_greater_than_or_equal_to_0
+  -
+    value: 'Rating should be less than or equal to 100'
+    unitId: rating_should_be_less_than_or_equal_to_100
