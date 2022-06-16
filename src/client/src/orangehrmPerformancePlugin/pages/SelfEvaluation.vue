@@ -81,7 +81,7 @@ import ReviewSummary from '../components/ReviewSummary';
 import FinalEvaluation from '../components/FinalEvaluation';
 
 export default {
-  name: 'SelfReviewEvaluate',
+  name: 'SelfEvaluation',
   components: {
     'review-summary': ReviewSummary,
     'final-evaulation': FinalEvaluation,

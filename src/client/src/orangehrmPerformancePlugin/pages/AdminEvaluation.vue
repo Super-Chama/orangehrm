@@ -21,22 +21,179 @@
 <template>
   <div class="orangehrm-background-container">
     <div class="orangehrm-card-container">
-      <oxd-text tag="h6" class="orangehrm-main-title">
-        Administrator Evaluation Form
+      <oxd-text tag="h5" class="orangehrm-performance-review-title">
+        {{ $t('performance.performance_review') }}
       </oxd-text>
     </div>
     <br />
-    <oxd-form>
+    <review-summary
+      :emp-number="empNumber"
+      :employee-name="employeeName"
+      :job-title="jobTitle"
+      :status="status"
+      :review-period-start="reviewPeriodStart"
+      :review-period-end="reviewPeriodEnd"
+      :due-date="dueDate"
+    />
+    <br />
+    <oxd-form :loading="isLoading" @submitValid="onClickSave(true)">
       <evaluation-form></evaluation-form>
+      <br />
+      <div class="orangehrm-card-container">
+        <oxd-divider />
+        <final-evaluation
+          v-model:completed-date="completedDate"
+          v-model:final-rating="finalRating"
+          v-model:final-comment="finalComment"
+          :status="status"
+        />
+        <oxd-divider />
+        <oxd-form-actions>
+          <oxd-button
+            display-type="ghost"
+            :label="$t('general.back')"
+            @click="onClickBack"
+          />
+          <oxd-button
+            v-show="!completed"
+            display-type="ghost"
+            class="orangehrm-left-space"
+            :label="$t('general.save')"
+            @click="onClickSave(false)"
+          />
+          <oxd-button
+            v-show="!completed"
+            display-type="secondary"
+            class="orangehrm-left-space"
+            :label="$t('performance.complete')"
+            type="submit"
+          />
+        </oxd-form-actions>
+      </div>
     </oxd-form>
   </div>
 </template>
 
 <script>
+import {computed} from 'vue';
+import {APIService} from '@/core/util/services/api.service';
+import {navigate, reloadPage} from '@/core/util/helper/navigation';
+import Divider from '@ohrm/oxd/core/components/Divider/Divider.vue';
+import ReviewSummary from '../components/ReviewSummary';
+import FinalEvaluation from '../components/FinalEvaluation';
 import EvaluationForm from '@/orangehrmPerformancePlugin/components/EvaluationForm';
+
 export default {
+  name: 'AdminEvaluation',
   components: {
+    'oxd-divider': Divider,
+    'review-summary': ReviewSummary,
+    'final-evaluation': FinalEvaluation,
     'evaluation-form': EvaluationForm,
+  },
+  props: {
+    reviewId: {
+      type: Number,
+      required: true,
+    },
+    empNumber: {
+      type: Number,
+      required: true,
+    },
+    employeeName: {
+      type: String,
+      required: true,
+    },
+    jobTitle: {
+      type: String,
+      required: true,
+    },
+    status: {
+      type: Number,
+      required: true,
+    },
+    reviewPeriodStart: {
+      type: String,
+      required: true,
+    },
+    reviewPeriodEnd: {
+      type: String,
+      required: true,
+    },
+    dueDate: {
+      type: String,
+      required: true,
+    },
+    isReviewer: {
+      type: Boolean,
+      default: false,
+    },
+  },
+  setup(props) {
+    const http = new APIService(window.appGlobal.baseUrl, '');
+    // TODO workflow
+    const completed = computed(() => props.status === 4);
+
+    return {
+      http,
+      completed,
+    };
+  },
+  data() {
+    return {
+      isLoading: false,
+      completedDate: null,
+      finalRating: null,
+      finalComment: null,
+    };
+  },
+  beforeMount() {
+    this.isLoading = true;
+    this.http
+      .request({
+        method: 'GET',
+        url: `/api/v2/performance/reviews/${this.reviewId}/evaluation/final`,
+      })
+      .then(response => {
+        const {data} = response.data;
+        this.completedDate = data.completedDate;
+        this.finalRating = data.finalRating;
+        this.finalComment = data.finalComment;
+      })
+      .finally(() => {
+        this.isLoading = false;
+      });
+  },
+  methods: {
+    onClickSave(complete = false) {
+      this.isLoading = true;
+      this.http
+        .request({
+          method: 'PUT',
+          url: `/api/v2/performance/reviews/${this.reviewId}/evaluation/final`,
+          data: {
+            complete: complete,
+            completedDate: this.completedDate,
+            finalComment: this.finalComment,
+            finalRating: this.finalRating,
+          },
+        })
+        .then(() => {
+          return this.$toast.saveSuccess();
+        })
+        .finally(() => {
+          reloadPage();
+        });
+    },
+    onClickBack() {
+      navigate(
+        this.isReviewer
+          ? '/performance/searchEvaluatePerformancReview'
+          : '/performance/searchPerformanceReview',
+      );
+    },
   },
 };
 </script>
+
+<style src="./review-evaluate.scss" lang="scss" scoped></style>

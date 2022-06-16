@@ -225,5 +225,5 @@ performance_employee_admin_evaluation:
 
 performance_review_evaluate_self:
   path: /performance/reviewEvaluate/id/{id}
-  controller: OrangeHRM\Performance\Controller\SelfReviewEvaluateController::handle
+  controller: OrangeHRM\Performance\Controller\SelfEvaluationController::handle
   methods: [ GET ]

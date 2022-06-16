@@ -26,7 +26,7 @@ use OrangeHRM\Core\Vue\Component;
 use OrangeHRM\Framework\Http\Request;
 use OrangeHRM\Performance\Traits\Service\PerformanceReviewServiceTrait;
 
-class SelfReviewEvaluateController extends ReviewEvaluateController
+class SelfEvaluationController extends AdminEvaluationController
 {
     use PerformanceReviewServiceTrait;
     use UserRoleManagerTrait;
@@ -36,14 +36,18 @@ class SelfReviewEvaluateController extends ReviewEvaluateController
      */
     public function preRender(Request $request): void
     {
-        $id = $request->attributes->getInt('id');
-        $component = new Component('self-review-evaluate');
+        if ($request->attributes->has('id')) {
+            $id = $request->attributes->getInt('id');
+            $component = new Component('self-evaluation');
 
-        $review = $this->getPerformanceReviewService()->getPerformanceReviewDao()->getPerformanceReviewById($id);
-        if (!is_null($review)) {
-            $this->setReviewProps($component, $review);
+            $review = $this->getPerformanceReviewService()->getPerformanceReviewDao()->getPerformanceReviewById($id);
+            if (!is_null($review)) {
+                $this->setReviewProps($component, $review);
+            }
+            $this->setComponent($component);
+        } else {
+            throw new RequestForwardableException(NoRecordsFoundController::class . '::handle');
         }
-        $this->setComponent($component);
     }
 
     /**
