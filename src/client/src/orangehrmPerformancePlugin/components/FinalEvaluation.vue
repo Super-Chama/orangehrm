@@ -62,6 +62,7 @@
 </template>
 
 <script>
+import {computed} from 'vue';
 import {
   digitsOnlyWithDecimalPoint,
   required,
@@ -83,12 +84,19 @@ export default {
       type: String,
       required: true,
     },
-    readOnly: {
-      type: Boolean,
-      default: false,
+    status: {
+      type: Number,
+      required: true,
     },
   },
   emits: ['update:finalRating', 'update:finalComment', 'update:completedDate'],
+  setup(props) {
+    const readOnly = computed(() => props.status === 4);
+
+    return {
+      readOnly,
+    };
+  },
   data() {
     return {
       rules: {

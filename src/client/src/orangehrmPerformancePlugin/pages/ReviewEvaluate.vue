@@ -26,56 +26,15 @@
       </oxd-text>
     </div>
     <br />
-    <div class="orangehrm-card-container">
-      <oxd-text tag="h5" class="orangehrm-performance-review-title">
-        {{ $t('performance.review_summary') }}
-      </oxd-text>
-      <div class="orangehrm-performance-review-owner">
-        <img alt="profile picture" class="employee-image" :src="imgSrc" />
-        <div class="orangehrm-performance-review-owner-employee-section">
-          <div class="orangehrm-performance-review-owner-employee">
-            <oxd-text
-              tag="h5"
-              class="orangehrm-performance-review-owner-employee-name"
-            >
-              {{ employeeName }}
-            </oxd-text>
-            <oxd-text
-              tag="h6"
-              class="orangehrm-performance-review-owner-employee-job"
-            >
-              {{ jobTitle }}
-            </oxd-text>
-          </div>
-        </div>
-      </div>
-      <div class="orangehrm-performance-review-details">
-        <div class="orangehrm-performance-review-details-column">
-          <oxd-text type="subtitle-2">
-            {{ $t('performance.review_status') }}
-          </oxd-text>
-          <oxd-text class="orangehrm-performance-review-bold">
-            {{ reviewStatus }}
-          </oxd-text>
-        </div>
-        <div class="orangehrm-performance-review-details-column">
-          <oxd-text type="subtitle-2">
-            {{ $t('performance.review_period') }}
-          </oxd-text>
-          <oxd-text class="orangehrm-performance-review-bold">
-            {{ reviewPeriod }}
-          </oxd-text>
-        </div>
-        <div class="orangehrm-performance-review-details-column">
-          <oxd-text type="subtitle-2">
-            {{ $t('performance.review_due_date') }}
-          </oxd-text>
-          <oxd-text class="orangehrm-performance-review-bold">
-            {{ reviewDueDate }}
-          </oxd-text>
-        </div>
-      </div>
-    </div>
+    <review-summary
+      :emp-number="empNumber"
+      :employee-name="employeeName"
+      :job-title="jobTitle"
+      :status="status"
+      :review-period-start="reviewPeriodStart"
+      :review-period-end="reviewPeriodEnd"
+      :due-date="dueDate"
+    />
     <br />
     <div class="orangehrm-card-container">
       <oxd-form :loading="isLoading" @submitValid="onClickSave(true)">
@@ -84,7 +43,7 @@
           v-model:completed-date="completedDate"
           v-model:final-rating="finalRating"
           v-model:final-comment="finalComment"
-          :read-only="readOnly"
+          :status="status"
         />
         <oxd-divider />
         <oxd-form-actions>
@@ -109,18 +68,16 @@
 
 <script>
 import {APIService} from '@/core/util/services/api.service';
-import {formatDate, parseDate} from '@ohrm/core/util/helper/datefns';
-import useLocale from '@/core/util/composable/useLocale';
-import useDateFormat from '@/core/util/composable/useDateFormat';
-import usei18n from '@/core/util/composable/usei18n';
-import Divider from '@ohrm/oxd/core/components/Divider/Divider.vue';
-import FinalEvaluation from '@/orangehrmPerformancePlugin/components/FinalEvaluation';
 import {reloadPage} from '@/core/util/helper/navigation';
+import Divider from '@ohrm/oxd/core/components/Divider/Divider.vue';
+import ReviewSummary from '../components/ReviewSummary';
+import FinalEvaluation from '../components/FinalEvaluation';
 
 export default {
   name: 'ReviewEvaluate',
   components: {
     'oxd-divider': Divider,
+    'review-summary': ReviewSummary,
     'final-evaluation': FinalEvaluation,
   },
   props: {
@@ -157,39 +114,11 @@ export default {
       required: true,
     },
   },
-  setup(props) {
-    const {$t} = usei18n();
-    const {jsDateFormat} = useDateFormat();
-    const {locale} = useLocale();
-
+  setup() {
     const http = new APIService(window.appGlobal.baseUrl, '');
-
-    const statusOpts = [
-      {id: 1, label: $t('performance.inactive')},
-      {id: 2, label: $t('performance.activated')},
-      {id: 3, label: $t('performance.in_progress')},
-      {id: 4, label: $t('performance.completed')},
-    ];
-
-    const reviewDateFormat = date =>
-      formatDate(parseDate(date), jsDateFormat, {locale});
-
-    const imgSrc = `${window.appGlobal.baseUrl}/pim/viewPhoto/empNumber/${props.empNumber}`;
-    const reviewStatus = statusOpts.find(el => el.id === props.status).label;
-    const reviewPeriod = `${reviewDateFormat(props.reviewPeriodStart)} - ${
-      props.reviewPeriodEnd
-    }`;
-    const reviewDueDate = reviewDateFormat(props.dueDate);
-
-    const readOnly = props.status === 4;
 
     return {
       http,
-      imgSrc,
-      reviewStatus,
-      reviewPeriod,
-      reviewDueDate,
-      readOnly,
     };
   },
   data() {
@@ -248,59 +177,6 @@ export default {
   &-title {
     font-size: 14px;
     font-weight: 800;
-  }
-
-  &-bold {
-    font-weight: 700;
-  }
-
-  &-owner {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    margin-top: 1.2rem;
-    margin-bottom: 1.2rem;
-
-    & img {
-      width: 100px;
-      height: 100px;
-      border-radius: 100%;
-      display: flex;
-      overflow: hidden;
-      justify-content: center;
-      box-sizing: border-box;
-    }
-
-    &-employee-section {
-      display: flex;
-    }
-
-    &-employee {
-      display: flex;
-      flex-direction: column;
-      padding-left: 1.2rem;
-      padding-right: 0.6rem;
-      padding-top: 1.2rem;
-
-      &-name {
-        font-weight: 700;
-        font-size: 21px;
-      }
-
-      &-job {
-        font-weight: 700;
-        color: $oxd-interface-gray-color;
-      }
-    }
-  }
-
-  &-details {
-    display: flex;
-    flex-direction: row;
-
-    &-column {
-      width: 30%;
-    }
   }
 }
 </style>
