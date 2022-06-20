@@ -40,7 +40,7 @@
         v-model="employeeReview"
         :kpis="kpis"
         :rules="rules"
-        :editable="false"
+        :editable="status < 4"
         :collapsed="employeeStatus < 3"
         :collapsible="employeeStatus === 3"
         :employee="employee"
@@ -53,7 +53,7 @@
         v-model="supervisorReview"
         :kpis="kpis"
         :rules="rules"
-        :editable="true"
+        :editable="status < 4"
         :collapsible="true"
         :employee="supervisor"
         :job-title="jobTitle"
@@ -172,6 +172,7 @@ export default {
       generateModel,
       generateEvaluationFormData,
       finalizeReview,
+      saveEmployeeReview,
       saveSupervisorReview,
     } = useReviewEvaluation(http);
     // TODO workflow
@@ -191,6 +192,7 @@ export default {
       getSupervisorReview,
       getFinalReview,
       finalizeReview,
+      saveEmployeeReview,
       saveSupervisorReview,
     };
   },
@@ -251,6 +253,15 @@ export default {
           if (this.invalid === true) return;
           this.isLoading = true;
           this.saveSupervisorReview(this.reviewId, this.supervisorReview)
+            .then(() => {
+              if (this.employeeStatus === 3) {
+                this.saveEmployeeReview(
+                  this.reviewId,
+                  true,
+                  this.employeeReview,
+                );
+              }
+            })
             .then(() => {
               this.finalizeReview(this.reviewId, {
                 complete: complete,

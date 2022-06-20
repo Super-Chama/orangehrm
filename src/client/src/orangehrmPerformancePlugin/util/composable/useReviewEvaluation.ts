@@ -92,6 +92,25 @@ export default function useReviewEvaluation(http: APIService) {
     });
   };
 
+  const saveEmployeeReview = (
+    reviewId: number,
+    complete: boolean,
+    ratings: Array<{
+      kpiId: number;
+      rating: number;
+      comment: string;
+    }>,
+  ) => {
+    return http.request({
+      method: 'PUT',
+      url: `/api/v2/performance/reviews/${reviewId}/evaluation/employee`,
+      data: {
+        complete,
+        ratings,
+      },
+    });
+  };
+
   const saveSupervisorReview = (
     reviewId: number,
     ratings: Array<{
@@ -151,6 +170,7 @@ export default function useReviewEvaluation(http: APIService) {
     generateModel,
     generateEvaluationFormData,
     finalizeReview,
+    saveEmployeeReview,
     saveSupervisorReview,
   };
 }
