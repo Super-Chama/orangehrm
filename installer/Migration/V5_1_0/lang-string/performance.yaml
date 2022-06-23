@@ -227,3 +227,6 @@ langStrings:
   -
     value: 'Evaluation Completed'
     unitId: evaluation_completed
+  -
+    value: 'General Comment'
+    unitId: general_comment
