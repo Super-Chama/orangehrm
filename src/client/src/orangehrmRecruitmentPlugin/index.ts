@@ -31,6 +31,8 @@ import SaveCandidate from './pages/SaveCandidate.vue';
 import ViewCandidatesList from './pages/ViewCandidatesList.vue';
 import ViewCandidateProfile from './pages/ViewCandidateProfile.vue';
 import PostScheduleActionHistory from './pages/PostScheduleActionHistory.vue';
+import SaveDeclineOffer from './pages/SaveDeclineOffer.vue';
+
 
 export default {
   'view-job-vacancy': ViewJobVacancy,
@@ -48,4 +50,6 @@ export default {
   'offer-decline-action': OfferDeclinedAction,
   'hire-action': HireAction,
   'post-schedule-action-history': PostScheduleActionHistory,
+  'save-decline-offer': SaveDeclineOffer,
+
 };
