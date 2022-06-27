@@ -75,9 +75,11 @@ class CandidateActionController extends AbstractVueController
             case 13:
                 $component = new Component('save-hire');
                 break;
+            case 14:
+                $component = new Component('save-decline-offer');
+                break;
             default:
                 throw new RequestForwardableException(NoRecordsFoundController::class . '::handle');
-                break;
         }
         if ($interviewId) {
             $component->addProp(new Prop('interview-id', Prop::TYPE_NUMBER, $interviewId));

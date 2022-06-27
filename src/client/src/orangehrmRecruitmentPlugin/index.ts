@@ -35,6 +35,7 @@ import PostScheduleActionHistory from './pages/PostScheduleActionHistory.vue';
 import SaveInterviewFailed from './pages/SaveInterviewFail.vue';
 import SaveOfferJob from './pages/SaveOfferJob.vue';
 import SaveHire from './pages/SaveHire.vue';
+import SaveDeclineOffer from './pages/SaveDeclineOffer.vue';
 
 export default {
   'view-job-vacancy': ViewJobVacancy,
@@ -56,4 +57,5 @@ export default {
   'save-interview-failed': SaveInterviewFailed,
   'save-offer-job': SaveOfferJob,
   'save-hire': SaveHire,
+  'save-decline-offer': SaveDeclineOffer,
 };
