@@ -38,6 +38,7 @@ class CandidateActionController extends AbstractVueController
         $candidateId = $request->query->getInt('candidateId');
         $actionId = $request->query->getInt('selectedAction');
         $interviewId = $request->query->getInt('interviewId');
+
         switch ($actionId) {
             case 2:
                 $component = new Component('shortlist-action');
