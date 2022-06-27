@@ -30,6 +30,11 @@ import ShortlistAction from './pages/ShortlistAction.vue';
 import SaveCandidate from './pages/SaveCandidate.vue';
 import ViewCandidatesList from './pages/ViewCandidatesList.vue';
 import ViewCandidateProfile from './pages/ViewCandidateProfile.vue';
+import SaveInterviewPassed from './pages/SaveInterviewPassed.vue';
+import PostScheduleActionHistory from './pages/PostScheduleActionHistory.vue';
+import SaveInterviewFailed from './pages/SaveInterviewFail.vue';
+import SaveOfferJob from './pages/SaveOfferJob.vue';
+import SaveHire from './pages/SaveHire.vue';
 
 export default {
   'view-job-vacancy': ViewJobVacancy,
@@ -46,4 +51,9 @@ export default {
   'offer-job-action': OfferJobAction,
   'offer-decline-action': OfferDeclinedAction,
   'hired-action': HiredAction,
+  'save-interview-passed': SaveInterviewPassed,
+  'post-schedule-action-history': PostScheduleActionHistory,
+  'save-interview-failed': SaveInterviewFailed,
+  'save-offer-job': SaveOfferJob,
+  'save-hire': SaveHire,
 };
