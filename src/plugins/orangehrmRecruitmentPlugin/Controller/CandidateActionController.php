@@ -63,9 +63,6 @@ class CandidateActionController extends AbstractVueController
             case 9:
                 $component = new Component('hire-action');
                 break;
-            case 11:
-                $component = new Component('save-interview-failed');
-                break;
             case 12:
                 $component = new Component('save-offer-job');
                 break;
