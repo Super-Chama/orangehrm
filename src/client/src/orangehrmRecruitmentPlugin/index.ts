@@ -32,7 +32,6 @@ import ViewCandidatesList from './pages/ViewCandidatesList.vue';
 import ViewCandidateProfile from './pages/ViewCandidateProfile.vue';
 import PostScheduleActionHistory from './pages/PostScheduleActionHistory.vue';
 
-
 export default {
   'view-job-vacancy': ViewJobVacancy,
   'add-job-vacancy': AddJobVacancy,
@@ -49,5 +48,4 @@ export default {
   'offer-decline-action': OfferDeclinedAction,
   'hire-action': HireAction,
   'post-schedule-action-history': PostScheduleActionHistory,
-
 };

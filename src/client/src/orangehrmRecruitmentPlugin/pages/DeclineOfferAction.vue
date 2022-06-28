@@ -21,19 +21,19 @@
 <template>
   <div class="orangehrm-background-container">
     <candidate-action-layout
-        v-model:loading="isLoading"
-        :candidate-id="candidateId"
-        :title="$t('recruitment.decline_offer')"
-        @submitValid="onSave"
+      v-model:loading="isLoading"
+      :candidate-id="candidateId"
+      :title="$t('recruitment.decline_offer')"
+      @submitValid="onSave"
     >
       <oxd-form-row>
         <oxd-grid :cols="3">
           <oxd-grid-item class="--span-column-2">
             <oxd-input-field
-                v-model="note"
-                :label="$t('general.notes')"
-                :placeholder="$t('general.type_here')"
-                type="textarea"
+              v-model="note"
+              :label="$t('general.notes')"
+              :placeholder="$t('general.type_here')"
+              type="textarea"
             />
           </oxd-grid-item>
         </oxd-grid>
@@ -42,9 +42,9 @@
       <oxd-divider />
       <oxd-form-actions>
         <oxd-button
-            display-type="ghost"
-            :label="$t('general.back')"
-            @click="onClickBack"
+          display-type="ghost"
+          :label="$t('general.back')"
+          @click="onClickBack"
         />
         <submit-button :label="$t('recruitment.decline_offer')" />
       </oxd-form-actions>
@@ -70,8 +70,8 @@ export default {
 
   setup(props) {
     const http = new APIService(
-        window.appGlobal.baseUrl,
-        `api/v2/recruitment/candidates/${props.candidateId}/job/decline`,
+      window.appGlobal.baseUrl,
+      `api/v2/recruitment/candidates/${props.candidateId}/job/decline`,
     );
 
     return {
@@ -88,16 +88,16 @@ export default {
     onSave() {
       this.isLoading = true;
       this.http
-          .request({
-            method: 'PUT',
-            data: {
-              note: this.note,
-            },
-          })
-          .then(() => {
-            return this.$toast.updateSuccess();
-          })
-          .then(() => this.onClickBack());
+        .request({
+          method: 'PUT',
+          data: {
+            note: this.note,
+          },
+        })
+        .then(() => {
+          return this.$toast.updateSuccess();
+        })
+        .then(() => this.onClickBack());
     },
     onClickBack() {
       navigate('/recruitment/addCandidate/{id}', {id: this.candidateId});
