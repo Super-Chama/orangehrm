@@ -31,7 +31,6 @@ import SaveCandidate from './pages/SaveCandidate.vue';
 import ViewCandidatesList from './pages/ViewCandidatesList.vue';
 import ViewCandidateProfile from './pages/ViewCandidateProfile.vue';
 import PostScheduleActionHistory from './pages/PostScheduleActionHistory.vue';
-import SaveOfferJob from './pages/SaveOfferJob.vue';
 import SaveHire from './pages/SaveHire.vue';
 
 export default {
@@ -50,6 +49,5 @@ export default {
   'offer-decline-action': OfferDeclinedAction,
   'hired-action': HiredAction,
   'post-schedule-action-history': PostScheduleActionHistory,
-  'save-offer-job': SaveOfferJob,
   'save-hire': SaveHire,
 };
