@@ -21,7 +21,7 @@ import AddJobVacancy from './pages/AddJobVacancy.vue';
 import EditJobVacancy from './pages/EditJobVacancy.vue';
 import HiredAction from './pages/HiredAction.vue';
 import InterviewFailedAction from './pages/InterviewFailedAction.vue';
-import InterviewPassedAction from './pages/InterviewPassedAction.vue';
+import InterviewPassedAction from './pages/InterviewPassed.vue';
 import InterviewScheduleAction from './pages/InterviewScheduleAction.vue';
 import OfferJobAction from './pages/OfferJobAction.vue';
 import OfferDeclinedAction from './pages/OfferDeclinedAction.vue';
@@ -30,7 +30,6 @@ import ShortlistAction from './pages/ShortlistAction.vue';
 import SaveCandidate from './pages/SaveCandidate.vue';
 import ViewCandidatesList from './pages/ViewCandidatesList.vue';
 import ViewCandidateProfile from './pages/ViewCandidateProfile.vue';
-import SaveInterviewPassed from './pages/SaveInterviewPassed.vue';
 import PostScheduleActionHistory from './pages/PostScheduleActionHistory.vue';
 import SaveInterviewFailed from './pages/SaveInterviewFail.vue';
 import SaveOfferJob from './pages/SaveOfferJob.vue';
@@ -51,7 +50,6 @@ export default {
   'offer-job-action': OfferJobAction,
   'offer-decline-action': OfferDeclinedAction,
   'hired-action': HiredAction,
-  'save-interview-passed': SaveInterviewPassed,
   'post-schedule-action-history': PostScheduleActionHistory,
   'save-interview-failed': SaveInterviewFailed,
   'save-offer-job': SaveOfferJob,
