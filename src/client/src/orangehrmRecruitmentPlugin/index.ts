@@ -24,14 +24,13 @@ import InterviewFailedAction from './pages/InterviewFailAction.vue';
 import InterviewPassedAction from './pages/InterviewPassedAction.vue';
 import InterviewScheduleAction from './pages/InterviewScheduleAction.vue';
 import OfferJobAction from './pages/OfferJobAction.vue';
-import OfferDeclinedAction from './pages/OfferDeclinedAction.vue';
+import OfferDeclinedAction from './pages/DeclineOfferAction.vue';
 import RejectAction from './pages/RejectAction.vue';
 import ShortlistAction from './pages/ShortlistAction.vue';
 import SaveCandidate from './pages/SaveCandidate.vue';
 import ViewCandidatesList from './pages/ViewCandidatesList.vue';
 import ViewCandidateProfile from './pages/ViewCandidateProfile.vue';
 import PostScheduleActionHistory from './pages/PostScheduleActionHistory.vue';
-import SaveDeclineOffer from './pages/SaveDeclineOffer.vue';
 
 
 export default {
@@ -50,6 +49,5 @@ export default {
   'offer-decline-action': OfferDeclinedAction,
   'hire-action': HireAction,
   'post-schedule-action-history': PostScheduleActionHistory,
-  'save-decline-offer': SaveDeclineOffer,
 
 };

@@ -87,7 +87,6 @@ export default {
   methods: {
     onSave() {
       this.isLoading = true;
-      this.isLoading = true;
       this.http
         .request({
           method: 'PUT',

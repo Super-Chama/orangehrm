@@ -63,9 +63,6 @@ class CandidateActionController extends AbstractVueController
             case 9:
                 $component = new Component('hire-action');
                 break;
-            case 14:
-                $component = new Component('save-decline-offer');
-                break;
             default:
                 throw new RequestForwardableException(NoRecordsFoundController::class . '::handle');
         }
