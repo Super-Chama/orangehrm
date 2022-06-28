@@ -191,3 +191,12 @@ langStrings:
   -
     value: 'Rejected'
     unitId: rejected
+  -
+    value: 'Hired'
+    unitId: hired
+  -
+    value: 'Application Initiated'
+    unitId: application_initiated_uc
+  -
+    value: 'Offer Declined'
+    unitId: offer_declined
