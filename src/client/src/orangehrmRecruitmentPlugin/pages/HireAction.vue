@@ -66,16 +66,12 @@ export default {
       type: Number,
       required: true,
     },
-    interviewId: {
-      type: Number,
-      required: true,
-    },
   },
 
   setup(props) {
     const http = new APIService(
       window.appGlobal.baseUrl,
-      `api/v2/recruitment/candidates/${props.candidateId}`,
+      `api/v2/recruitment/candidates/${props.candidateId}/hire`,
     );
 
     return {
@@ -91,19 +87,18 @@ export default {
   methods: {
     onSave() {
       this.isLoading = true;
+      this.isLoading = true;
       this.http
-        .update('hire', {
-          note: this.note,
-        })
-        .then(result => {
-          this.historyId = result.data?.data.id;
-          return this.$toast.saveSuccess();
+        .request({
+          method: 'PUT',
+          data: {
+            note: this.note,
+          },
         })
         .then(() => {
-          navigate(
-            `/recruitment/candidate/${this.candidateId}/history/${this.historyId}`,
-          );
-        });
+          return this.$toast.updateSuccess();
+        })
+        .then(() => this.onClickBack());
     },
     onClickBack() {
       navigate('/recruitment/addCandidate/{id}', {id: this.candidateId});
