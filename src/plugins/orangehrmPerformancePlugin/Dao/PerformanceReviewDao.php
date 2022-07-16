@@ -330,8 +330,7 @@ class PerformanceReviewDao extends BaseDao
             ->andWhere('rt.supervisor = :supervisorId')
             ->setParameter('supervisorId', $supervisorId)
             ->andWhere('rt.subordinate = :subordinateId')
-            ->setParameter('subordinateId', $subordinateId)
-            ->andWhere($qb->expr()->isNull('employee.employeeTerminationRecord'));
+            ->setParameter('subordinateId', $subordinateId);
         return $qb->getQuery()->execute();
     }
 
