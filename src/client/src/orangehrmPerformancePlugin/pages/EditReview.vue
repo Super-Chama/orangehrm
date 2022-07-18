@@ -238,7 +238,7 @@ export default {
     onSave(activate = false) {
       this.validate().then(() => {
         if (this.invalid === true) return;
-        if (activate && this.review.supervisorReviewer.isPastEmployee) {
+        if (this.review.supervisorReviewer.isPastEmployee) {
           return this.$toast.warn({
             title: this.$t('general.warning'),
             message: this.$t(
