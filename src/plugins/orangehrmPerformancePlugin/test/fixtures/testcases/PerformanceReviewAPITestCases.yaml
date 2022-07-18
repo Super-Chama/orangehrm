@@ -280,6 +280,8 @@ Update:
       pim.employee_service: \OrangeHRM\Pim\Service\EmployeeService
     factories:
       core.authorization.user_role_manager: [ '\OrangeHRM\Core\Authorization\Manager\UserRoleManagerFactory', 'getNewUserRoleManager' ]
+    now:
+      datetime: '2022-02-03'
     attributes:
       id: 9
     body:
@@ -302,6 +304,8 @@ Update:
       pim.employee_service: \OrangeHRM\Pim\Service\EmployeeService
     factories:
       core.authorization.user_role_manager: [ '\OrangeHRM\Core\Authorization\Manager\UserRoleManagerFactory', 'getNewUserRoleManager' ]
+    now:
+      datetime: '2022-02-03'
     attributes:
       id: 9
     body:

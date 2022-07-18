@@ -359,11 +359,7 @@ class PerformanceReviewAPI extends Endpoint implements CrudEndpoint
             RequestParams::PARAM_TYPE_BODY,
             self::FILTER_REVIEWER_EMP_NUMBER
         );
-        $reportToRecord = $this->getPerformanceReviewService()->getPerformanceReviewDao()
-            ->getSupervisorRecord($review->getEmployee()->getEmpNumber(), $reviewerEmpNumber);
-        if ($reportToRecord == null) {
-            throw $this->getBadRequestException();
-        }
+
         if ($this->getRequestParams()->getBooleanOrNull(RequestParams::PARAM_TYPE_BODY, self::PARAMETER_ACTIVATE) == true) {
             try {
                 $review->setActivatedDate($this->getDateTimeHelper()->getNow());
