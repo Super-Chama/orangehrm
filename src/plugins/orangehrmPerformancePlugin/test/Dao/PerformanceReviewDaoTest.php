@@ -91,7 +91,7 @@ class PerformanceReviewDaoTest extends KernelTestCase
         $this->assertCount(0, $result2);
 
         $result3 = $this->performanceReviewDao->getSupervisorRecord($employeeId, $pastSupervisor);
-        $this->assertCount(0, $result3);
+        $this->assertCount(1, $result3);
     }
 
     public function testCreateReviewWithTransactionException(): void
