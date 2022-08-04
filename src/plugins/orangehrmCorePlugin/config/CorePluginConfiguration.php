@@ -68,7 +68,7 @@ class CorePluginConfiguration implements PluginConfigurationInterface
             'cookie_path' => $path,
             'cookie_samesite' => 'Strict',
         ];
-        $sessionStorage = new NativeSessionStorage($options, new NativeFileSessionHandler());
+        $sessionStorage = new NativeSessionStorage($options, new NativeFileSessionHandler(\OrangeHRM\Config\Config::get(\OrangeHRM\Config\Config::CACHE_DIR) . '/session'));
         $session = new Session($sessionStorage);
         $session->start();
 
