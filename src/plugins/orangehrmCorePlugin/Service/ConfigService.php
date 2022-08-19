@@ -503,7 +503,7 @@ class ConfigService
     {
         $ldapSetting = $this->_getConfigValue(self::KEY_LDAP_SETTINGS);
         if (is_null($ldapSetting)) {
-            return new LDAPSetting('localhost', 389, 'OpenLDAP', 'none', null);
+            return new LDAPSetting('localhost', 389, 'OpenLDAP', 'none', 'dc=example,dc=com');
         }
         return LDAPSetting::fromString($ldapSetting);
     }

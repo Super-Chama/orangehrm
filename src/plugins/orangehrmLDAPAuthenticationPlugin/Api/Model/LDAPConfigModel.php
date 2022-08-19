@@ -43,7 +43,7 @@ class LDAPConfigModel implements Normalizable
     {
         return [
             'enable' => $this->LDAPSetting->isEnable(),
-            'host' => $this->LDAPSetting->getHost(),
+            'hostname' => $this->LDAPSetting->getHost(),
             'port' => $this->LDAPSetting->getPort(),
             'encryption' => $this->LDAPSetting->getEncryption(),
             'implementation' => $this->LDAPSetting->getImplementation(),

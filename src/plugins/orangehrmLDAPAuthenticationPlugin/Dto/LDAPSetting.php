@@ -36,7 +36,7 @@ class LDAPSetting
     private ?string $bindUserDN = null;
     private ?string $bindUserPassword = null;
 
-    private ?string $baseDN = null;
+    private ?string $baseDN = 'dc=example,dc=com';
     private string $searchScope = QueryInterface::SCOPE_SUB;
 
     private string $userNameAttribute = 'cn';

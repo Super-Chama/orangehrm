@@ -35,7 +35,7 @@ Update:
     data:
       {
         "enable": false,
-        "host": "localhost",
+        "hostname": "localhost",
         "port": 389,
         "encryption": "none",
         "implementation": "OpenLDAP",
@@ -96,7 +96,7 @@ Update:
     data:
       {
         "enable": false,
-        "host": "localhost",
+        "hostname": "localhost",
         "port": 389,
         "encryption": "none",
         "implementation": "OpenLDAP",
@@ -236,13 +236,13 @@ GetOne:
     data:
       {
         "enable": false,
-        "host": "localhost",
+        "hostname": "localhost",
         "port": 389,
         "encryption": "none",
         "implementation": "OpenLDAP",
         "bindAnonymously": true,
         "distinguishedName": null,
-        "baseDistinguishedName": null,
+        "baseDistinguishedName": 'dc=example,dc=com',
         "searchScope": "sub",
         "userNameAttribute": "cn",
         "dataMapping": {
@@ -272,7 +272,7 @@ GetOne:
     data:
       {
         "enable": false,
-        "host": "localhost",
+        "hostname": "localhost",
         "port": 389,
         "encryption": "ssl",
         "implementation": "OpenLDAP",
