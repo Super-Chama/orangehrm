@@ -106,7 +106,7 @@ class EmployeeTimeAtWorkService
             'currentWeek' => [
                 'startDate' => $this->getDateDetails($weekStartDate),
                 'endDate' => $this->getDateDetails($weekEndDate),
-                'totalTime' => $this->getTimeInHoursAndMinutes($totalTimeForWeek)
+                'totalTime' => $this->getTimeInHoursAndMinutes($this->totalTimeForWeek)
             ],
             'currentUser' => $this->getCurrentUserData($empNumber)
         ];
