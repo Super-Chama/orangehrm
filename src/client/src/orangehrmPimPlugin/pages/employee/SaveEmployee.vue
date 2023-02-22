@@ -126,11 +126,6 @@
 
 <script>
 import {ref} from 'vue';
-import {APIService} from '@/core/util/services/api.service';
-import {navigate} from '@ohrm/core/util/helper/navigation';
-import ProfileImageInput from '@/orangehrmPimPlugin/components/ProfileImageInput';
-import FullNameInput from '@/orangehrmPimPlugin/components/FullNameInput';
-import PasswordInput from '@/core/components/inputs/PasswordInput';
 import {
   maxFileSize,
   required,
@@ -139,6 +134,11 @@ import {
   validFileTypes,
 } from '@ohrm/core/util/validation/rules';
 import {OxdSwitchInput} from '@ohrm/oxd';
+import {navigate} from '@ohrm/core/util/helper/navigation';
+import {APIService} from '@/core/util/services/api.service';
+import PasswordInput from '@/core/components/inputs/PasswordInput.vue';
+import FullNameInput from '@/orangehrmPimPlugin/components/FullNameInput.vue';
+import ProfileImageInput from '@/orangehrmPimPlugin/components/ProfileImageInput.vue';
 
 const defaultPic = `${window.appGlobal.baseUrl}/../images/default-photo.png`;
 

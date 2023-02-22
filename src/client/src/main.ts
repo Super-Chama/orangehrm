@@ -1,5 +1,6 @@
 import {createApp} from 'vue';
 import {createPinia} from 'pinia';
+import acl from './core/plugins/acl/acl';
 import createI18n from './core/plugins/i18n/translate';
 
 import '@ohrm/oxd/fonts.css';
@@ -26,6 +27,7 @@ const {i18n, init} = createI18n({
   baseUrl: baseUrl,
   resourceUrl: 'core/i18n/messages',
 });
+app.use(acl);
 app.use(i18n);
 
 app.use(createPinia());

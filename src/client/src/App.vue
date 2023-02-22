@@ -1,5 +1,8 @@
 <template>
-  <oxd-layout>
+  <oxd-layout v-bind="$attrs" :sidepanel-menu-items="sidepanelMenuItems">
+    <template v-for="(_, name) in $slots" #[name]="slotData">
+      <slot :name="name" v-bind="slotData" />
+    </template>
     <router-view></router-view>
     <template #user-actions>
       <li>
@@ -13,7 +16,10 @@
         </router-link>
       </li>
       <li>
-        <router-link to="update-password" class="oxd-userdropdown-link">
+        <router-link
+          class="oxd-userdropdown-link"
+          :to="{name: 'updatePassword'}"
+        >
           {{ $t('general.change_password') }}
         </router-link>
       </li>
@@ -30,12 +36,14 @@
 </template>
 
 <script>
+import {useRoute} from 'vue-router';
 import {OxdLayout} from '@ohrm/oxd';
-import {provide, readonly} from 'vue';
+import {computed, provide, readonly, shallowRef} from 'vue';
 import {RouterLink, RouterView} from 'vue-router';
 import {dateFormatKey} from '@/core/util/composable/useDateFormat';
 
 export default {
+  inheritAttrs: false,
   components: {
     'oxd-layout': OxdLayout,
     'router-link': RouterLink,
@@ -60,6 +68,7 @@ export default {
     },
   },
   setup(props) {
+    const route = useRoute();
     provide('permissions', readonly(props.permissions));
     provide(dateFormatKey, readonly(props.dateFormat));
 
@@ -67,8 +76,39 @@ export default {
       if (props.helpUrl) window.open(props.helpUrl, '_blank');
     };
 
+    const sidepanelItems = shallowRef([
+      {
+        name: 'Admin',
+        url: '#/admin',
+        icon: 'admin',
+        active: false,
+      },
+      {
+        name: 'PIM',
+        url: '#/pim',
+        icon: 'pim',
+        active: false,
+      },
+      {
+        name: 'Leave',
+        url: '#/leave',
+        icon: 'leave',
+        active: false,
+      },
+    ]);
+
+    const sidepanelMenuItems = computed(() =>
+      sidepanelItems.value.map((item) => {
+        return {
+          ...item,
+          active: item.url.substring(2) === route.meta?.group,
+        };
+      }),
+    );
+
     return {
       onClickSupport,
+      sidepanelMenuItems,
     };
   },
 };

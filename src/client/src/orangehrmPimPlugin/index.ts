@@ -16,66 +16,59 @@
  * Boston, MA  02110-1301, USA
  */
 
-import SaveEmployee from './pages/employee/SaveEmployee.vue';
 import Employee from './pages/employee/Employee.vue';
-import EmployeePersonalDetails from './pages/employee/EmployeePersonalDetails.vue';
-import EmployeeContactDetails from './pages/employee/EmployeeContactDetails.vue';
-import EmployeeEmergencyContacts from './pages/employee/EmployeeEmergencyContacts.vue';
-import EmployeeDependents from './pages/employee/EmployeeDependents.vue';
-import EmployeeProfilePicture from './pages/employee/EmployeeProfilePicture.vue';
-import EmployeeSalary from './pages/employee/EmployeeSalary.vue';
-import EmployeeJob from './pages/employee/EmployeeJob.vue';
-import EmployeeQualifications from './pages/employee/EmployeeQualifications.vue';
-import EmployeeImmigration from './pages/employee/EmployeeImmigration.vue';
-import EmployeeReportTo from './pages/employee/EmployeeReportTo.vue';
-import EmployeeMembership from './pages/employee/EmployeeMembership.vue';
-import TerminationReason from './pages/terminationReason/TerminationReason.vue';
-import EditTerminationReason from './pages/terminationReason/EditTerminationReason.vue';
-import SaveTerminationReason from './pages/terminationReason/SaveTerminationReason.vue';
-import ReportingMethod from './pages/reportingMethod/ReportingMethod.vue';
-import EditReportingMethod from './pages/reportingMethod/EditReportingMethod.vue';
-import SaveReportingMethod from './pages/reportingMethod/SaveReportingMethod.vue';
-import CustomField from './pages/customField/CustomField.vue';
-import EditCustomField from './pages/customField/EditCustomField.vue';
-import SaveCustomField from './pages/customField/SaveCustomField.vue';
-import OptionalField from './pages/optionalField/OptionalField.vue';
-import EmployeeTaxExemption from './pages/employee/EmployeeTaxExemption.vue';
-import EmployeeDataImport from './pages/dataImport/EmployeeDataImport.vue';
+import SaveEmployee from './pages/employee/SaveEmployee.vue';
 import EmployeeReport from './pages/reports/EmployeeReport.vue';
-import SaveEmployeeReport from './pages/reports/SaveEmployeeReport.vue';
-import ViewEmployeeReport from './pages/reports/ViewEmployeeReport.vue';
-import EditEmployeeReport from './pages/reports/EditEmployeeReport.vue';
 import UpdatePassword from './pages/updatePassword/UpdatePassword.vue';
+// import EmployeePersonalDetails from './pages/employee/EmployeePersonalDetails.vue';
+// import EmployeeContactDetails from './pages/employee/EmployeeContactDetails.vue';
+// import EmployeeEmergencyContacts from './pages/employee/EmployeeEmergencyContacts.vue';
+// import EmployeeDependents from './pages/employee/EmployeeDependents.vue';
+// import EmployeeProfilePicture from './pages/employee/EmployeeProfilePicture.vue';
+// import EmployeeSalary from './pages/employee/EmployeeSalary.vue';
+// import EmployeeJob from './pages/employee/EmployeeJob.vue';
+// import EmployeeQualifications from './pages/employee/EmployeeQualifications.vue';
+// import EmployeeImmigration from './pages/employee/EmployeeImmigration.vue';
+// import EmployeeReportTo from './pages/employee/EmployeeReportTo.vue';
+// import EmployeeMembership from './pages/employee/EmployeeMembership.vue';
+// import TerminationReason from './pages/terminationReason/TerminationReason.vue';
+// import EditTerminationReason from './pages/terminationReason/EditTerminationReason.vue';
+// import SaveTerminationReason from './pages/terminationReason/SaveTerminationReason.vue';
+// import ReportingMethod from './pages/reportingMethod/ReportingMethod.vue';
+// import EditReportingMethod from './pages/reportingMethod/EditReportingMethod.vue';
+// import SaveReportingMethod from './pages/reportingMethod/SaveReportingMethod.vue';
+// import CustomField from './pages/customField/CustomField.vue';
+// import EditCustomField from './pages/customField/EditCustomField.vue';
+// import SaveCustomField from './pages/customField/SaveCustomField.vue';
+// import OptionalField from './pages/optionalField/OptionalField.vue';
+// import EmployeeTaxExemption from './pages/employee/EmployeeTaxExemption.vue';
+// import EmployeeDataImport from './pages/dataImport/EmployeeDataImport.vue';
+// import SaveEmployeeReport from './pages/reports/SaveEmployeeReport.vue';
+// import ViewEmployeeReport from './pages/reports/ViewEmployeeReport.vue';
+// import EditEmployeeReport from './pages/reports/EditEmployeeReport.vue';
 
-export default {
-  'employee-save': SaveEmployee,
-  'employee-list': Employee,
-  'employee-personal-details': EmployeePersonalDetails,
-  'employee-contact-details': EmployeeContactDetails,
-  'employee-emergency-contacts': EmployeeEmergencyContacts,
-  'employee-dependents': EmployeeDependents,
-  'employee-profile-picture': EmployeeProfilePicture,
-  'employee-salary': EmployeeSalary,
-  'employee-job': EmployeeJob,
-  'employee-qualifications': EmployeeQualifications,
-  'employee-immigration': EmployeeImmigration,
-  'employee-membership': EmployeeMembership,
-  'termination-reason-list': TerminationReason,
-  'termination-reason-edit': EditTerminationReason,
-  'termination-reason-save': SaveTerminationReason,
-  'reporting-method-list': ReportingMethod,
-  'reporting-method-edit': EditReportingMethod,
-  'reporting-method-save': SaveReportingMethod,
-  'employee-report-to': EmployeeReportTo,
-  'custom-field-list': CustomField,
-  'custom-field-edit': EditCustomField,
-  'custom-field-save': SaveCustomField,
-  'optional-field-list': OptionalField,
-  'employee-tax-exemption': EmployeeTaxExemption,
-  'employee-data-import': EmployeeDataImport,
-  'employee-report-list': EmployeeReport,
-  'employee-report-save': SaveEmployeeReport,
-  'employee-report-view': ViewEmployeeReport,
-  'employee-report-edit': EditEmployeeReport,
-  'update-password': UpdatePassword,
-};
+const pimRoutes = [
+  {
+    path: '',
+    name: 'viewEmployeeList',
+    component: Employee,
+  },
+  {
+    path: 'add-employee',
+    name: 'AddEmployee',
+    component: SaveEmployee,
+  },
+  {
+    path: 'update-password',
+    name: 'updatePassword',
+    component: UpdatePassword,
+    props: {userName: 'Admin'},
+  },
+  {
+    path: 'employee-report',
+    name: 'ViewEmployeeReport',
+    component: EmployeeReport,
+  },
+];
+
+export default pimRoutes;

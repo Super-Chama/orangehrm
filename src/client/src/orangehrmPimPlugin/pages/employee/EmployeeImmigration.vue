@@ -74,7 +74,7 @@ import ProfileActionHeader from '@/orangehrmPimPlugin/components/ProfileActionHe
 import EditEmployeeLayout from '@/orangehrmPimPlugin/components/EditEmployeeLayout';
 import SaveImmigration from '@/orangehrmPimPlugin/components/SaveImmigration';
 import EditImmigration from '@/orangehrmPimPlugin/components/EditImmigration';
-import DeleteConfirmationDialog from '@ohrm/components/dialogs/DeleteConfirmationDialog';
+import DeleteConfirmationDialog from '@ohrm/components/dialogs/DeleteConfirmationDialog.vue';
 import useDateFormat from '@/core/util/composable/useDateFormat';
 import {formatDate, parseDate} from '@/core/util/helper/datefns';
 import useLocale from '@/core/util/composable/useLocale';

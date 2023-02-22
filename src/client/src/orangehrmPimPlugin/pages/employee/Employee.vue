@@ -128,18 +128,18 @@
 
 <script>
 import {computed, ref} from 'vue';
-import DeleteConfirmationDialog from '@ohrm/components/dialogs/DeleteConfirmationDialog';
-import usePaginate from '@ohrm/core/util/composable/usePaginate';
+import usei18n from '@/core/util/composable/usei18n';
+import useSort from '@ohrm/core/util/composable/useSort';
 import {navigate} from '@ohrm/core/util/helper/navigation';
 import {APIService} from '@/core/util/services/api.service';
-import EmployeeAutocomplete from '@/core/components/inputs/EmployeeAutocomplete';
-import JobtitleDropdown from '@/orangehrmPimPlugin/components/JobtitleDropdown';
-import SubunitDropdown from '@/orangehrmPimPlugin/components/SubunitDropdown';
-import EmploymentStatusDropdown from '@/orangehrmPimPlugin/components/EmploymentStatusDropdown';
-import IncludeEmployeeDropdown from '@/core/components/dropdown/IncludeEmployeeDropdown';
-import useSort from '@ohrm/core/util/composable/useSort';
 import {validSelection} from '@/core/util/validation/rules';
-import usei18n from '@/core/util/composable/usei18n';
+import usePaginate from '@ohrm/core/util/composable/usePaginate';
+import SubunitDropdown from '@/orangehrmPimPlugin/components/SubunitDropdown.vue';
+import JobtitleDropdown from '@/orangehrmPimPlugin/components/JobtitleDropdown.vue';
+import EmployeeAutocomplete from '@/core/components/inputs/EmployeeAutocomplete.vue';
+import DeleteConfirmationDialog from '@/core/components/dialogs/DeleteConfirmationDialog.vue';
+import IncludeEmployeeDropdown from '@/core/components/dropdown/IncludeEmployeeDropdown.vue';
+import EmploymentStatusDropdown from '@/orangehrmPimPlugin/components/EmploymentStatusDropdown.vue';
 
 const defaultSortOrder = {
   'employee.employeeId': 'DEFAULT',

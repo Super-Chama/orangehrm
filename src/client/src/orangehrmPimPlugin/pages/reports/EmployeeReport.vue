@@ -100,8 +100,8 @@ import {APIService} from '@/core/util/services/api.service';
 import useSort from '@ohrm/core/util/composable/useSort';
 import {navigate} from '@ohrm/core/util/helper/navigation';
 import usePaginate from '@ohrm/core/util/composable/usePaginate';
-import DeleteConfirmationDialog from '@ohrm/components/dialogs/DeleteConfirmationDialog';
-import ReportAutocomplete from '@/orangehrmPimPlugin/components/ReportAutocomplete';
+import ReportAutocomplete from '@/orangehrmPimPlugin/components/ReportAutocomplete.vue';
+import DeleteConfirmationDialog from '@ohrm/components/dialogs/DeleteConfirmationDialog.vue';
 
 const defaultFilters = {
   report: null,

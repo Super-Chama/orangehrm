@@ -72,7 +72,7 @@ import ProfileActionHeader from '@/orangehrmPimPlugin/components/ProfileActionHe
 import EditEmployeeLayout from '@/orangehrmPimPlugin/components/EditEmployeeLayout';
 import SaveEmergencyContact from '@/orangehrmPimPlugin/components/SaveEmergencyContact';
 import EditEmergencyContact from '@/orangehrmPimPlugin/components/EditEmergencyContact';
-import DeleteConfirmationDialog from '@ohrm/components/dialogs/DeleteConfirmationDialog';
+import DeleteConfirmationDialog from '@ohrm/components/dialogs/DeleteConfirmationDialog.vue';
 
 export default {
   components: {

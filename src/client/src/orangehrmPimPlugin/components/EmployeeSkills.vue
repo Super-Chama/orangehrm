@@ -68,7 +68,7 @@ import {APIService} from '@ohrm/core/util/services/api.service';
 import ProfileActionHeader from '@/orangehrmPimPlugin/components/ProfileActionHeader';
 import SaveSkill from '@/orangehrmPimPlugin/components/SaveSkill';
 import EditSkill from '@/orangehrmPimPlugin/components/EditSkill';
-import DeleteConfirmationDialog from '@ohrm/components/dialogs/DeleteConfirmationDialog';
+import DeleteConfirmationDialog from '@ohrm/components/dialogs/DeleteConfirmationDialog.vue';
 
 const skillNormalizer = (data) => {
   return data.map((item) => {
