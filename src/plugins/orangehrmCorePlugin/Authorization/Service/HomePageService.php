@@ -30,7 +30,7 @@ class HomePageService
      */
     public function getHomePagePath(): ?string
     {
-        return $this->getUserRoleManager()->getHomePage();
+        return "/app";
     }
 
     /**

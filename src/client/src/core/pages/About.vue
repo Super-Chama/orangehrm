@@ -19,66 +19,68 @@
  -->
 
 <template>
-  <oxd-dialog
-    :style="{width: '90%', maxWidth: '450px'}"
-    @update:show="onCancel"
-  >
-    <div class="orangehrm-modal-header">
-      <oxd-text tag="h6" class="orangehrm-main-title">
-        {{ $t('general.about') }}
-      </oxd-text>
-    </div>
-    <oxd-divider />
-    <div v-if="isLoading" class="orangehrm-loader">
-      <oxd-loading-spinner />
-    </div>
-    <oxd-grid v-else :cols="2" class="orangehrm-about">
-      <oxd-grid-item>
-        <oxd-text tag="p" class="orangehrm-about-title">
-          {{ $t('general.company_name') }}:
+  <teleport to="#app">
+    <oxd-dialog
+      :style="{width: '90%', maxWidth: '450px'}"
+      @update:show="onCancel"
+    >
+      <div class="orangehrm-modal-header">
+        <oxd-text tag="h6" class="orangehrm-main-title">
+          {{ $t('general.about') }}
         </oxd-text>
-      </oxd-grid-item>
-      <oxd-grid-item>
-        <oxd-text tag="p" class="orangehrm-about-text">
-          {{ data.companyName }}
-        </oxd-text>
-      </oxd-grid-item>
-      <oxd-grid-item>
-        <oxd-text tag="p" class="orangehrm-about-title">
-          {{ $t('general.version') }}:
-        </oxd-text>
-      </oxd-grid-item>
-      <oxd-grid-item>
-        <oxd-text tag="p" class="orangehrm-about-text">
-          {{ data.productName }} {{ data.version }}
-        </oxd-text>
-      </oxd-grid-item>
-      <template v-if="data.numberOfActiveEmployee !== undefined">
+      </div>
+      <oxd-divider />
+      <div v-if="isLoading" class="orangehrm-loader">
+        <oxd-loading-spinner />
+      </div>
+      <oxd-grid v-else :cols="2" class="orangehrm-about">
         <oxd-grid-item>
           <oxd-text tag="p" class="orangehrm-about-title">
-            {{ $t('general.active_employees') }}:
+            {{ $t('general.company_name') }}:
           </oxd-text>
         </oxd-grid-item>
         <oxd-grid-item>
           <oxd-text tag="p" class="orangehrm-about-text">
-            {{ data.numberOfActiveEmployee }}
+            {{ data.companyName }}
           </oxd-text>
         </oxd-grid-item>
-      </template>
-      <template v-if="data.numberOfPastEmployee !== undefined">
         <oxd-grid-item>
           <oxd-text tag="p" class="orangehrm-about-title">
-            {{ $t('general.employees_terminated') }}:
+            {{ $t('general.version') }}:
           </oxd-text>
         </oxd-grid-item>
         <oxd-grid-item>
           <oxd-text tag="p" class="orangehrm-about-text">
-            {{ data.numberOfPastEmployee }}
+            {{ data.productName }} {{ data.version }}
           </oxd-text>
         </oxd-grid-item>
-      </template>
-    </oxd-grid>
-  </oxd-dialog>
+        <template v-if="data.numberOfActiveEmployee !== undefined">
+          <oxd-grid-item>
+            <oxd-text tag="p" class="orangehrm-about-title">
+              {{ $t('general.active_employees') }}:
+            </oxd-text>
+          </oxd-grid-item>
+          <oxd-grid-item>
+            <oxd-text tag="p" class="orangehrm-about-text">
+              {{ data.numberOfActiveEmployee }}
+            </oxd-text>
+          </oxd-grid-item>
+        </template>
+        <template v-if="data.numberOfPastEmployee !== undefined">
+          <oxd-grid-item>
+            <oxd-text tag="p" class="orangehrm-about-title">
+              {{ $t('general.employees_terminated') }}:
+            </oxd-text>
+          </oxd-grid-item>
+          <oxd-grid-item>
+            <oxd-text tag="p" class="orangehrm-about-text">
+              {{ data.numberOfPastEmployee }}
+            </oxd-text>
+          </oxd-grid-item>
+        </template>
+      </oxd-grid>
+    </oxd-dialog>
+  </teleport>
 </template>
 
 <script>
@@ -90,7 +92,6 @@ export default {
     'oxd-loading-spinner': OxdSpinner,
     'oxd-dialog': OxdDialog,
   },
-  emits: ['close'],
   setup() {
     const http = new APIService(window.appGlobal.baseUrl, 'api/v2/core/about');
     return {
@@ -117,7 +118,7 @@ export default {
   },
   methods: {
     onCancel() {
-      this.$emit('close', true);
+      this.$router.back();
     },
   },
 };

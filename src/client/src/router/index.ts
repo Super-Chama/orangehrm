@@ -1,21 +1,24 @@
 import {createRouter, createWebHashHistory} from 'vue-router';
-import HomeView from '../views/HomeView.vue';
+import About from '@/core/pages/About.vue';
+import ViewSupport from '@/orangehrmHelpPlugin/pages/ViewSupport.vue';
 
 const router = createRouter({
   history: createWebHashHistory(),
   routes: [
     {
-      path: '/',
-      name: 'home',
-      component: HomeView,
-    },
-    {
       path: '/about',
       name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import('../views/AboutView.vue'),
+      component: About,
+    },
+    {
+      path: '/support',
+      name: 'support',
+      component: ViewSupport,
+    },
+    {
+      path: '/update-password',
+      name: 'updatePassword',
+      component: ViewSupport,
     },
   ],
 });

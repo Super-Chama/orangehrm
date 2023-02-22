@@ -30,10 +30,7 @@
         logout-url="{{ baseUrl }}/auth/logout"
         support-url="{{ baseUrl }}/help/support"
         :user="{{ user | json_encode() }}"
-        :breadcrumb="{{ breadcrumb | json_encode() }}"
         :date-format="{{ dateFormat | json_encode() }}"
-        :topbar-menu-items="{{ topMenuItems | json_encode() }}"
-        :sidepanel-menu-items="{{ sidePanelMenuItems | json_encode() }}"
         :permissions="{{ (permissions ? permissions : []) | json_encode() }}"
         :update-password-url="{{ user.hasPassword ? "\"#{baseUrl}/pim/updatePassword\"" : "null" }}"
         {% for prop in componentProps %}

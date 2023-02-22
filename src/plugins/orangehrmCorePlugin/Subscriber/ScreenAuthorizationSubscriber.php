@@ -70,7 +70,7 @@ class ScreenAuthorizationSubscriber extends AbstractEventSubscriber
         $module = $this->getCurrentModuleAndScreen()->getModule();
         $screen = $this->getCurrentModuleAndScreen()->getScreen();
 
-        if ($module === 'auth' && $screen == 'logout') {
+        if (($module === 'auth' && $screen === 'logout') || $module === 'app') {
             return;
         }
 

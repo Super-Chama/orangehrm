@@ -125,8 +125,6 @@ class VueControllerHelper
      */
     public function getContextParams(): array
     {
-        list($sidePanelMenuItems, $topMenuItems) = $this->getMenuItems();
-        list($contextTitle, $contextIcon) = $this->getContextItems();
         list($clientLogoUrl, $clientBannerUrl, $themeVariables) = $this->getThemeData();
 
         $this->context->add(
@@ -137,14 +135,9 @@ class VueControllerHelper
                 self::BASE_URL => $this->getRequest()->getBaseUrl(),
                 self::ASSETS_VERSION => $this->getAssetsVersion(),
                 self::USER => $this->getUserObject(),
-                self::SIDE_PANEL_MENU_ITEMS => $sidePanelMenuItems,
-                self::TOP_MENU_ITEMS => $topMenuItems,
-                self::CONTEXT_TITLE => $contextTitle,
-                self::CONTEXT_ICON => $contextIcon,
                 self::COPYRIGHT_YEAR => date('Y'),
                 self::PRODUCT_VERSION => Config::PRODUCT_VERSION,
                 self::PRODUCT_NAME => Config::PRODUCT_NAME,
-                self::BREADCRUMB => $this->getBreadcrumb(),
                 self::DATE_FORMAT => $this->getLocalizationService()->getCurrentDateFormat(),
                 self::CLIENT_LOGO_URL => $clientLogoUrl,
                 self::CLIENT_BANNER_URL => $clientBannerUrl,
