@@ -22,29 +22,26 @@
   </noscript>
 
   <div id="app">
-    <oxd-layout
+    <core-app
+        help-url="{{ helpUrl }}"
         home-url="https://www.orangehrm.com/"
-        :sidepanel-menu-items="{{ sidePanelMenuItems | json_encode() }}"
-        :topbar-menu-items="{{ topMenuItems | json_encode() }}"
-        :user="{{ user | json_encode() }}"
         brand-logo-src="{{ clientLogoUrl }}"
         brand-banner-src="{{ clientBannerUrl }}"
         logout-url="{{ baseUrl }}/auth/logout"
         support-url="{{ baseUrl }}/help/support"
-        :update-password-url="{{ user.hasPassword ? "\"#{baseUrl}/pim/updatePassword\"" : "null" }}"
-        :permissions="{{ (permissions ? permissions : []) | json_encode() }}"
+        :user="{{ user | json_encode() }}"
         :breadcrumb="{{ breadcrumb | json_encode() }}"
         :date-format="{{ dateFormat | json_encode() }}"
-        help-url="{{ helpUrl }}"
+        :topbar-menu-items="{{ topMenuItems | json_encode() }}"
+        :sidepanel-menu-items="{{ sidePanelMenuItems | json_encode() }}"
+        :permissions="{{ (permissions ? permissions : []) | json_encode() }}"
+        :update-password-url="{{ user.hasPassword ? "\"#{baseUrl}/pim/updatePassword\"" : "null" }}"
+        {% for prop in componentProps %}
+          :{{ prop.getName() }}="{{ prop.getValue() }}"
+        {% endfor %}
     >
-      <{{ componentName }}
-      {% for prop in componentProps %}
-        :{{ prop.getName() }}="{{ prop.getValue() }}"
-      {% endfor %}
-      >
-    </{{ componentName }}>
-    <template v-slot:footer>{% include 'copyright.html.twig' %}<br></template>
-    </oxd-layout>
+      <template v-slot:footer>{% include 'copyright.html.twig' %}<br></template>
+    </core-app>
   </div>
 {% endblock %}
 

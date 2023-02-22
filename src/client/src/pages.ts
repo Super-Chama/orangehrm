@@ -16,10 +16,10 @@
  * Boston, MA  02110-1301, USA
  */
 
-// import App from '@/App.vue';
+import App from '@/App.vue';
 import AuthPages from '@/orangehrmAuthenticationPlugin';
 
 export default {
   ...AuthPages,
-  // 'core-app': App,
+  'core-app': App,
 };
