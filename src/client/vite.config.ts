@@ -3,7 +3,7 @@ import {defineConfig} from 'vite';
 import vue from '@vitejs/plugin-vue';
 import {writeFile} from 'node:fs/promises';
 import {fileURLToPath, URL} from 'node:url';
-import autoprefixer from 'autoprefixer'
+import autoprefixer from 'autoprefixer';
 
 export default defineConfig({
   base: './',
@@ -28,11 +28,11 @@ export default defineConfig({
         entryFileNames: 'js/app.js',
         chunkFileNames: 'js/chunk-vendors.js',
         assetFileNames: (assetFile) => {
-          const filename = assetFile.name || ''
+          const filename = assetFile.name || '';
           if (/\.css/.test(filename)) {
             return 'css/app.css';
           }
-          return 'css/[name].[ext]'
+          return 'css/[name].[ext]';
         },
       },
     },
@@ -41,13 +41,15 @@ export default defineConfig({
     alias: {
       vue: 'vue/dist/vue.esm-bundler.js',
       '@': fileURLToPath(new URL('./src', import.meta.url)),
+      '@ohrm/core': fileURLToPath(new URL('./src/core', import.meta.url)),
+      '@ohrm/components': fileURLToPath(
+        new URL('./src/core/components', import.meta.url),
+      ),
     },
   },
   css: {
     postcss: {
-      plugins: [
-        autoprefixer()
-      ],
+      plugins: [autoprefixer()],
     },
     preprocessorOptions: {
       scss: {

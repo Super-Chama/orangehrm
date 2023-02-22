@@ -66,7 +66,7 @@ import {
 import {promiseDebounce} from '@ohrm/oxd';
 import {APIService} from '@/core/util/services/api.service';
 import usePasswordPolicy from '@/core/util/composable/usePasswordPolicy';
-import PasswordStrengthIndicator from '@/core/components/labels/PasswordStrengthIndicator';
+import PasswordStrengthIndicator from '@/core/components/labels/PasswordStrengthIndicator.vue';
 
 export default {
   name: 'PasswordInput',

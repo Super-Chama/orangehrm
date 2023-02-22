@@ -13,7 +13,7 @@
         </router-link>
       </li>
       <li>
-        <router-link to="updatePassword" class="oxd-userdropdown-link">
+        <router-link to="update-password" class="oxd-userdropdown-link">
           {{ $t('general.change_password') }}
         </router-link>
       </li>

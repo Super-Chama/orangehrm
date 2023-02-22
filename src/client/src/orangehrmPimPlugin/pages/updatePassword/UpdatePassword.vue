@@ -71,13 +71,13 @@
 </template>
 
 <script>
-import {APIService} from '@/core/util/services/api.service';
-import PasswordInput from '@/core/components/inputs/PasswordInput';
 import {
   required,
   shouldNotExceedCharLength,
 } from '@ohrm/core/util/validation/rules';
 import useForm from '@/core/util/composable/useForm';
+import {APIService} from '@/core/util/services/api.service';
+import PasswordInput from '@/core/components/inputs/PasswordInput.vue';
 
 const userModel = {
   currentPassword: '',
@@ -120,7 +120,7 @@ export default {
 
   methods: {
     onCancel() {
-      window.history.back();
+      this.$router.back();
     },
     onSave() {
       this.isLoading = true;
