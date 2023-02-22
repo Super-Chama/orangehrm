@@ -111,5 +111,9 @@ export default {
       sidepanelMenuItems,
     };
   },
+
+  beforeMount() {
+    this.$router.push({name: 'viewEmployeeList'});
+  },
 };
 </script>

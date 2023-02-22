@@ -83,7 +83,7 @@ import ProfileActionHeader from '@/orangehrmPimPlugin/components/ProfileActionHe
 import EditEmployeeLayout from '@/orangehrmPimPlugin/components/EditEmployeeLayout';
 import SaveSalaryComponent from '@/orangehrmPimPlugin/components/SaveSalaryComponent';
 import EditSalaryComponent from '@/orangehrmPimPlugin/components/EditSalaryComponent';
-import DeleteConfirmationDialog from '@ohrm/components/dialogs/DeleteConfirmationDialog.vue';
+import DeleteConfirmationDialog from '@/core/components/dialogs/DeleteConfirmationDialog.vue';
 
 const salaryNormalizer = (data) => {
   return data.map((item) => {

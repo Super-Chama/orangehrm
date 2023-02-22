@@ -77,7 +77,7 @@ import {convertFilesizeToString} from '@ohrm/core/util/helper/filesize';
 import SaveAttachment from '@/orangehrmPimPlugin/components/SaveAttachment';
 import EditAttachment from '@/orangehrmPimPlugin/components/EditAttachment';
 import ProfileActionHeader from '@/orangehrmPimPlugin/components/ProfileActionHeader';
-import DeleteConfirmationDialog from '@ohrm/components/dialogs/DeleteConfirmationDialog.vue';
+import DeleteConfirmationDialog from '@/core/components/dialogs/DeleteConfirmationDialog.vue';
 import useDateFormat from '@/core/util/composable/useDateFormat';
 import {parseDate, formatDate} from '@/core/util/helper/datefns';
 import useLocale from '@/core/util/composable/useLocale';

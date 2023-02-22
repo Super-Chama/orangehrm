@@ -101,7 +101,7 @@ import useSort from '@ohrm/core/util/composable/useSort';
 import {navigate} from '@ohrm/core/util/helper/navigation';
 import usePaginate from '@ohrm/core/util/composable/usePaginate';
 import ReportAutocomplete from '@/orangehrmPimPlugin/components/ReportAutocomplete.vue';
-import DeleteConfirmationDialog from '@ohrm/components/dialogs/DeleteConfirmationDialog.vue';
+import DeleteConfirmationDialog from '@/core/components/dialogs/DeleteConfirmationDialog.vue';
 
 const defaultFilters = {
   report: null,

@@ -72,7 +72,7 @@ import {APIService} from '@ohrm/core/util/services/api.service';
 import ProfileActionHeader from '@/orangehrmPimPlugin/components/ProfileActionHeader';
 import SaveLanguage from '@/orangehrmPimPlugin/components/SaveLanguage';
 import EditLanguage from '@/orangehrmPimPlugin/components/EditLanguage';
-import DeleteConfirmationDialog from '@ohrm/components/dialogs/DeleteConfirmationDialog.vue';
+import DeleteConfirmationDialog from '@/core/components/dialogs/DeleteConfirmationDialog.vue';
 
 const languageNormalizer = (data) => {
   return data.map((item) => {

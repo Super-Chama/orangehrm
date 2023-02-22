@@ -68,7 +68,7 @@ import {APIService} from '@ohrm/core/util/services/api.service';
 import ProfileActionHeader from '@/orangehrmPimPlugin/components/ProfileActionHeader';
 import SaveEducation from '@/orangehrmPimPlugin/components/SaveEducation';
 import EditEducation from '@/orangehrmPimPlugin/components/EditEducation';
-import DeleteConfirmationDialog from '@ohrm/components/dialogs/DeleteConfirmationDialog.vue';
+import DeleteConfirmationDialog from '@/core/components/dialogs/DeleteConfirmationDialog.vue';
 
 const educationNormalizer = (data) => {
   return data.map((item) => {
