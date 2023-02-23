@@ -1,6 +1,7 @@
 import {createApp} from 'vue';
 import {createPinia} from 'pinia';
 import acl from './core/plugins/acl/acl';
+import toaster from './core/plugins/toaster/toaster';
 import createI18n from './core/plugins/i18n/translate';
 
 import '@ohrm/oxd/fonts.css';
@@ -29,6 +30,12 @@ const {i18n, init} = createI18n({
 });
 app.use(acl);
 app.use(i18n);
+app.use(toaster, {
+  duration: 2500,
+  persist: true,
+  animation: 'oxd-toast-list',
+  position: 'bottom',
+});
 
 app.use(createPinia());
 app.use(components);

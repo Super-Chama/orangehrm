@@ -155,7 +155,7 @@ export default {
 
   methods: {
     onCancel() {
-      navigate('/admin/viewSystemUsers');
+      this.$router.push({name: 'viewSystemUsers'});
     },
     onSave() {
       this.isLoading = true;
@@ -168,10 +168,7 @@ export default {
           empNumber: this.user.employee?.id,
         })
         .then(() => {
-          return this.$toast.saveSuccess();
-        })
-        .then(() => {
-          // go back
+          this.$toast.saveSuccess();
           this.onCancel();
         });
     },

@@ -202,7 +202,7 @@ export default {
 
   methods: {
     onCancel() {
-      navigate('/admin/viewSystemUsers');
+      this.$router.push({name: 'viewSystemUsers'});
     },
     onSave() {
       this.isLoading = true;
@@ -216,9 +216,7 @@ export default {
           changePassword: this.user.changePassword,
         })
         .then(() => {
-          return this.$toast.updateSuccess();
-        })
-        .then(() => {
+          this.$toast.updateSuccess();
           this.onCancel();
         });
     },

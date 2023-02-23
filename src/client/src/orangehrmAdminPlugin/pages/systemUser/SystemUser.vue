@@ -323,11 +323,9 @@ export default {
             ids: items,
           })
           .then(() => {
-            return this.$toast.deleteSuccess();
-          })
-          .then(() => {
             this.isLoading = false;
             this.resetDataTable();
+            this.$toast.deleteSuccess();
           });
       }
     },
