@@ -91,8 +91,11 @@ export default {
     );
     const {createUniqueValidator} = useServerValidation(http);
     const subscriberUniqueValidation = createUniqueValidator(
-      'subscriber',
+      'emailSubscriber',
       'email',
+      null,
+      'emailNotification',
+      props.data.subscriptionId,
     );
 
     return {

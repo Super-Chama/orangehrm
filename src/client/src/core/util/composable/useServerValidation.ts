@@ -43,6 +43,8 @@ export default function useServerValidation(
     entityName: string,
     attributeName: string,
     entityId?: number,
+    matchByField?: string,
+    matchByValue?: string,
   ) => {
     const validationRequest = (value: string) => {
       return new Promise((resolve, reject) => {
@@ -56,6 +58,8 @@ export default function useServerValidation(
                 entityId,
                 entityName,
                 attributeName,
+                matchByField,
+                matchByValue,
               },
             })
             .then((response: AxiosResponse<UniqueValidationResponse>) => {
