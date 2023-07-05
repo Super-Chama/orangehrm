@@ -20,28 +20,27 @@
 namespace OrangeHRM\Admin\Dao;
 
 use OrangeHRM\Core\Dao\BaseDao;
-use OrangeHRM\Core\Traits\LoggerTrait;
 
 class ValidationUniqueDao extends BaseDao
 {
-    use LoggerTrait;
-
     /**
      * @param string $value
      * @param string $entityName
      * @param string $attributeName
      * @param string|null $entityId
+     * @param string|null $matchByField
+     * @param string|null $matchByValue
      * @return bool
      */
     public function isValueUnique(string $value, string $entityName, string $attributeName, ?string $entityId, ?string $matchByField, ?string $matchByValue): bool
     {
-        $this->getLogger()->error('values', [$value, $entityName, $attributeName, $matchByField, $matchByValue]);
         $qb = $this->createQueryBuilder('OrangeHRM\\Entity\\'  . ucfirst($entityName), 'entity');
         $qb->andWhere($qb->expr()->eq('entity.' . $attributeName, ':value'))
             ->setParameter('value', $value);
 
         if (!is_null($entityId)) {
-            $qb->andWhere($qb->expr()->neq('entity.id', ':id'))
+            $id = $entityName == 'employee' ? 'empNumber' : 'id';
+            $qb->andWhere($qb->expr()->neq('entity.' . $id, ':id'))
                 ->setParameter('id', $entityId);
         }
 
@@ -51,8 +50,6 @@ class ValidationUniqueDao extends BaseDao
         }
 
         $results = $qb->getQuery()->execute();
-        $this->getLogger()->error($qb->getQuery()->getSQL());
-        $this->getLogger()->error('results', $qb->getQuery()->getArrayResult());
 
         return empty($results);
     }

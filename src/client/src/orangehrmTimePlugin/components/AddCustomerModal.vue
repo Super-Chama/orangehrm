@@ -51,7 +51,8 @@ import {
   required,
   shouldNotExceedCharLength,
 } from '@ohrm/core/util/validation/rules';
-import {OxdDialog, promiseDebounce} from '@ohrm/oxd';
+import {OxdDialog} from '@ohrm/oxd';
+import useServerValidation from '@/core/util/composable/useServerValidation';
 
 const customerModel = {
   id: '',
@@ -71,8 +72,17 @@ export default {
       '/api/v2/time/customers',
     );
     http.setIgnorePath('/api/v2/time/validation/customer-name');
+    const {createUniqueValidator} = useServerValidation(http);
+    const customerNameUniqueValidation = createUniqueValidator(
+      'customer',
+      'name',
+      null,
+      'deleted',
+      'false',
+    );
     return {
       http,
+      customerNameUniqueValidation,
     };
   },
   data() {
@@ -83,7 +93,7 @@ export default {
         name: [
           required,
           shouldNotExceedCharLength(50),
-          promiseDebounce(this.validateCustomerName, 500),
+          this.customerNameUniqueValidation,
         ],
         description: [shouldNotExceedCharLength(255)],
       },
@@ -105,28 +115,6 @@ export default {
     },
     onCancel() {
       this.$emit('close');
-    },
-    validateCustomerName(customer) {
-      return new Promise((resolve) => {
-        if (customer) {
-          this.http
-            .request({
-              method: 'GET',
-              url: `/api/v2/time/validation/customer-name`,
-              params: {
-                customerName: this.customer.name.trim(),
-              },
-            })
-            .then((response) => {
-              const {data} = response.data;
-              return data.valid === true
-                ? resolve(true)
-                : resolve(this.$t('general.already_exists'));
-            });
-        } else {
-          resolve(true);
-        }
-      });
     },
   },
 };
