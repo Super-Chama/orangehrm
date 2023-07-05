@@ -91,7 +91,7 @@ export default {
         name: [
           required,
           shouldNotExceedCharLength(100),
-          this.qualificationUniqueValidation,
+          this.educationUniqueValidation,
         ],
       },
     };

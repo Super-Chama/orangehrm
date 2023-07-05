@@ -35,6 +35,7 @@ class ValidationUniqueDao extends BaseDao
      */
     public function isValueUnique(string $value, string $entityName, string $attributeName, ?string $entityId, ?string $matchByField, ?string $matchByValue): bool
     {
+        $this->getLogger()->error('values', [$value, $entityName, $attributeName, $matchByField, $matchByValue]);
         $qb = $this->createQueryBuilder('OrangeHRM\\Entity\\'  . ucfirst($entityName), 'entity');
         $qb->andWhere($qb->expr()->eq('entity.' . $attributeName, ':value'))
             ->setParameter('value', $value);
@@ -44,14 +45,14 @@ class ValidationUniqueDao extends BaseDao
                 ->setParameter('id', $entityId);
         }
 
-        // TODO fix
         if (!is_null($matchByValue) && !is_null($matchByField)) {
-            $qb->andWhere($qb->expr()->eq('entity.' . $matchByField, ':value'))
-                ->setParameter('value', $matchByValue);
+            $qb->andWhere($qb->expr()->eq('entity.' . $matchByField, ':matchValue'))
+                ->setParameter('matchValue', $matchByValue);
         }
 
         $results = $qb->getQuery()->execute();
-        $this->getLogger()->error('test', $results);
+        $this->getLogger()->error($qb->getQuery()->getSQL());
+        $this->getLogger()->error('results', $qb->getQuery()->getArrayResult());
 
         return empty($results);
     }

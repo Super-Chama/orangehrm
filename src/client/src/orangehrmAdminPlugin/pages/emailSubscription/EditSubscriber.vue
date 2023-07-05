@@ -94,6 +94,8 @@ export default {
       'emailSubscriber',
       'email',
       props.data.id,
+      'emailNotification',
+      props.data.subscriptionId,
     );
 
     return {

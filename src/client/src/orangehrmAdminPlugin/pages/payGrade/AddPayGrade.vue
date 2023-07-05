@@ -74,11 +74,11 @@ export default {
       'api/v2/admin/pay-grades',
     );
     const {createUniqueValidator} = useServerValidation(http);
-    const paygradeUniqueValidation = createUniqueValidator('paygrade', 'name');
+    const payGradeUniqueValidation = createUniqueValidator('payGrade', 'name');
 
     return {
       http,
-      paygradeUniqueValidation,
+      payGradeUniqueValidation: payGradeUniqueValidation,
     };
   },
   data() {
@@ -92,7 +92,7 @@ export default {
         name: [
           required,
           shouldNotExceedCharLength(50),
-          this.paygradeUniqueValidation,
+          this.payGradeUniqueValidation,
         ],
       },
       errors: [],
