@@ -123,7 +123,10 @@ export default {
       '/api/v2/admin/job-titles',
     );
     const {createUniqueValidator} = useServerValidation(http);
-    const jobTitleUniqueValidation = createUniqueValidator('jobTitle', 'title');
+    const jobTitleUniqueValidation = createUniqueValidator(
+      'jobTitle',
+      'jobTitleName',
+    );
 
     return {
       http,

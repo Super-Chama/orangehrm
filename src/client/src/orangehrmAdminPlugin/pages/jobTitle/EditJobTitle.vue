@@ -135,7 +135,7 @@ export default {
     const {createUniqueValidator} = useServerValidation(http);
     const jobTitleUniqueValidation = createUniqueValidator(
       'jobTitle',
-      'title',
+      'jobTitleName',
       props.jobTitleId,
     );
 
