@@ -213,6 +213,7 @@ export default {
           navigate('/time/saveProject/{id}', {id: this.projectId});
         });
     },
+    // TODO useServerValidation
     validateProjectName(project) {
       return new Promise((resolve) => {
         if (project) {
