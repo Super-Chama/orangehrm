@@ -263,6 +263,9 @@ export default {
       'employee',
       'employeeId',
       props.empNumber,
+      null,
+      null,
+      'pim.employee_id_exists',
     );
 
     return {

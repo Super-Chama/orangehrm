@@ -78,7 +78,7 @@ export default {
 
     return {
       http,
-      payGradeUniqueValidation: payGradeUniqueValidation,
+      payGradeUniqueValidation,
     };
   },
   data() {

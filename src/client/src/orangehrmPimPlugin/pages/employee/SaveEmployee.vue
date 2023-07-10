@@ -190,11 +190,14 @@ export default {
       '/api/v2/pim/employees',
     );
 
-    // TODO check on custom messages pim.employee_id_exists, pim.username_already_exists
     const {createUniqueValidator} = useServerValidation(http);
     const employeeIdUniqueValidation = createUniqueValidator(
       'employee',
       'employeeId',
+      null,
+      null,
+      null,
+      'pim.employee_id_exists',
     );
     const usernameUniqueValidation = createUniqueValidator(
       'user',
@@ -202,6 +205,7 @@ export default {
       null,
       'deleted',
       'false',
+      'pim.username_already_exists',
     );
 
     return {

@@ -39,13 +39,14 @@ export default function useServerValidation(
 ) {
   const translate = translatorFactory();
 
-  // TODO Add comment to explain matchByField & matchByValue
+  // If a secondary attribute is needed, assign the name and value to matchByField and matchByValue respectively
   const createUniqueValidator = (
     entityName: string,
     attributeName: string,
     entityId?: number,
     matchByField?: string,
     matchByValue?: string,
+    translateKey?: string,
   ) => {
     const validationRequest = (value: string) => {
       return new Promise((resolve, reject) => {
@@ -68,7 +69,8 @@ export default function useServerValidation(
               if (data.valid === true) {
                 resolve(true);
               } else {
-                resolve(translate('general.already_exists'));
+                const key = translateKey ?? 'general.already_exists';
+                resolve(translate(key));
               }
             })
             .catch((error) => reject(error));
