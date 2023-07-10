@@ -142,7 +142,7 @@ export default {
     const holidayDateUniqueValidation = createUniqueValidator(
       'holiday',
       'date',
-      props.holidayId,
+      {entityId: props.holidayId},
     );
 
     return {

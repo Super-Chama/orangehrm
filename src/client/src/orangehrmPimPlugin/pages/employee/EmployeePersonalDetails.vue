@@ -262,10 +262,10 @@ export default {
     const employeeIdUniqueValidation = createUniqueValidator(
       'employee',
       'employeeId',
-      props.empNumber,
-      null,
-      null,
-      'pim.employee_id_exists',
+      {
+        entityId: props.empNumber,
+        translateKey: 'pim.employee_id_exists',
+      },
     );
 
     return {

@@ -89,9 +89,11 @@ export default {
     const customerNameUniqueValidation = createUniqueValidator(
       'customer',
       'name',
-      props.customerId,
-      'deleted',
-      'false',
+      {
+        entityId: props.customerId,
+        matchByField: 'deleted',
+        matchByValue: 'false',
+      },
     );
     return {
       http,

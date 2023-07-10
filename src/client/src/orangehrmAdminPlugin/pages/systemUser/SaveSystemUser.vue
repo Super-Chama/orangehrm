@@ -126,13 +126,10 @@ export default {
     );
     http.setIgnorePath('/api/v2/admin/validation/user-name');
     const {createUniqueValidator} = useServerValidation(http);
-    const usernameValidation = createUniqueValidator(
-      'user',
-      'userName',
-      null,
-      'deleted',
-      'false',
-    );
+    const usernameValidation = createUniqueValidator('user', 'userName', {
+      matchByField: 'deleted',
+      matchByValue: 'false',
+    });
 
     return {
       http,

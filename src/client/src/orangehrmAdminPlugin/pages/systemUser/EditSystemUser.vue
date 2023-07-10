@@ -147,13 +147,11 @@ export default {
     );
     http.setIgnorePath('/api/v2/admin/validation/user-name');
     const {createUniqueValidator} = useServerValidation(http);
-    const usernameValidation = createUniqueValidator(
-      'user',
-      'userName',
-      props.systemUserId,
-      'deleted',
-      'false',
-    );
+    const usernameValidation = createUniqueValidator('user', 'userName', {
+      entityId: props.systemUserId,
+      matchByField: 'deleted',
+      matchByValue: 'false',
+    });
 
     return {
       http,

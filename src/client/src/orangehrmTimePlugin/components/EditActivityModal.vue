@@ -85,9 +85,11 @@ export default {
     const activityNameUniqueValidation = createUniqueValidator(
       'projectActivity',
       'name',
-      props.activityId,
-      'project',
-      props.projectId,
+      {
+        entityId: props.activityId,
+        matchByField: 'project',
+        matchByValue: props.projectId,
+      },
     );
     return {
       http,

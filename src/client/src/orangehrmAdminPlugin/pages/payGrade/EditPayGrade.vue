@@ -87,11 +87,9 @@ export default {
       '/api/v2/admin/pay-grades',
     );
     const {createUniqueValidator} = useServerValidation(http);
-    const payGradeUniqueValidation = createUniqueValidator(
-      'payGrade',
-      'name',
-      props.payGradeId,
-    );
+    const payGradeUniqueValidation = createUniqueValidator('payGrade', 'name', {
+      entityId: props.payGradeId,
+    });
     return {
       http,
       payGradeUniqueValidation,

@@ -111,7 +111,7 @@ export default {
     const claimEventNameUniqueValidation = createUniqueValidator(
       'claimEvent',
       'name',
-      props.id,
+      {entityId: props.id},
     );
     return {
       http,

@@ -129,7 +129,7 @@ export default {
     const leaveTypeUniqueValidation = createUniqueValidator(
       'leaveType',
       'name',
-      props.leaveTypeId,
+      {entityId: props.leaveTypeId},
     );
     return {
       http,

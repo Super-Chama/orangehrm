@@ -81,7 +81,7 @@ export default {
     const employmentStatusValidation = createUniqueValidator(
       'employmentStatus',
       'name',
-      props.employmentStatusId,
+      {entityId: props.employmentStatusId},
     );
 
     return {

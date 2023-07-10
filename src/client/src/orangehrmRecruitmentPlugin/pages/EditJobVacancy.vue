@@ -355,7 +355,7 @@ export default {
     const vacancyNameUniqueValidation = createUniqueValidator(
       'vacancy',
       'name',
-      props.vacancyId,
+      {entityId: props.vacancyId},
     );
     return {
       http,

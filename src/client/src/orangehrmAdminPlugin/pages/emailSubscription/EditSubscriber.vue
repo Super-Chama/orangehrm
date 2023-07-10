@@ -93,9 +93,11 @@ export default {
     const subscriberUniqueValidation = createUniqueValidator(
       'emailSubscriber',
       'email',
-      props.data.id,
-      'emailNotification',
-      props.data.subscriptionId,
+      {
+        entityId: props.data.id,
+        matchByField: 'emailNotification',
+        matchByValue: props.data.subscriptionId,
+      },
     );
 
     return {

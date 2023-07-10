@@ -138,7 +138,7 @@ export default {
     const workShiftUniqueValidation = createUniqueValidator(
       'workShift',
       'name',
-      props.workShiftId,
+      {entityId: props.workShiftId},
     );
 
     return {

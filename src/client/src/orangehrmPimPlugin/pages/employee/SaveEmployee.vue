@@ -194,19 +194,13 @@ export default {
     const employeeIdUniqueValidation = createUniqueValidator(
       'employee',
       'employeeId',
-      null,
-      null,
-      null,
-      'pim.employee_id_exists',
+      {translateKey: 'pim.employee_id_exists'},
     );
-    const usernameUniqueValidation = createUniqueValidator(
-      'user',
-      'userName',
-      null,
-      'deleted',
-      'false',
-      'pim.username_already_exists',
-    );
+    const usernameUniqueValidation = createUniqueValidator('user', 'userName', {
+      matchByField: 'deleted',
+      matchByValue: 'false',
+      translateKey: 'pim.username_already_exists',
+    });
 
     return {
       http,

@@ -79,7 +79,7 @@ export default {
     const educationUniqueValidation = createUniqueValidator(
       'education',
       'name',
-      props.educationId,
+      {entityId: props.educationId},
     );
 
     return {

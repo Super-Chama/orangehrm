@@ -274,9 +274,11 @@ export default {
       const projectNameUniqueValidation = this.createUniqueValidator(
         'project',
         'name',
-        this.projectId,
-        'customer',
-        this.project.customer ? this.project.customer.id : -1,
+        {
+          entityId: this.projectId,
+          matchByField: 'customer',
+          matchByValue: this.project.customer ? this.project.customer.id : -1,
+        },
       );
       return projectNameUniqueValidation(project);
     },

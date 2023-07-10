@@ -26,6 +26,14 @@ type useServerValidationOptions = {
   debounceOffset?: number;
 };
 
+// If a secondary attribute is needed, assign the name and value to matchByField and matchByValue respectively
+type createUniqueValidatorOptions = {
+  entityId?: number;
+  matchByField?: string;
+  matchByValue?: string;
+  translateKey?: string;
+};
+
 interface UniqueValidationResponse {
   data: {
     valid: boolean;
@@ -39,14 +47,12 @@ export default function useServerValidation(
 ) {
   const translate = translatorFactory();
 
-  // If a secondary attribute is needed, assign the name and value to matchByField and matchByValue respectively
   const createUniqueValidator = (
     entityName: string,
     attributeName: string,
-    entityId?: number,
-    matchByField?: string,
-    matchByValue?: string,
-    translateKey?: string,
+    validationOptions: createUniqueValidatorOptions = {
+      translateKey: 'general.already_exists',
+    },
   ) => {
     const validationRequest = (value: string) => {
       return new Promise((resolve, reject) => {
@@ -57,11 +63,11 @@ export default function useServerValidation(
               url: 'api/v2/admin/validation/unique',
               params: {
                 value,
-                entityId,
                 entityName,
                 attributeName,
-                matchByField,
-                matchByValue,
+                entityId: validationOptions.entityId,
+                matchByField: validationOptions.matchByField,
+                matchByValue: validationOptions.matchByValue,
               },
             })
             .then((response: AxiosResponse<UniqueValidationResponse>) => {
@@ -69,8 +75,11 @@ export default function useServerValidation(
               if (data.valid === true) {
                 resolve(true);
               } else {
-                const key = translateKey ?? 'general.already_exists';
-                resolve(translate(key));
+                resolve(
+                  translate(
+                    validationOptions.translateKey ?? 'general.already_exists',
+                  ),
+                );
               }
             })
             .catch((error) => reject(error));

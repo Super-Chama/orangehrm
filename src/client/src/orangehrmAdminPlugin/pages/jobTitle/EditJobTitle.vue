@@ -136,7 +136,7 @@ export default {
     const jobTitleUniqueValidation = createUniqueValidator(
       'jobTitle',
       'jobTitleName',
-      props.jobTitleId,
+      {entityId: props.jobTitleId},
     );
 
     return {

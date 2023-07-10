@@ -79,7 +79,7 @@ export default {
     const terminationReasonUniqueValidation = createUniqueValidator(
       'terminationReason',
       'name',
-      props.terminationReasonId,
+      {entityId: props.terminationReasonId},
     );
     return {
       http,

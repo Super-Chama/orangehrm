@@ -76,9 +76,10 @@ export default {
     const customerNameUniqueValidation = createUniqueValidator(
       'customer',
       'name',
-      null,
-      'deleted',
-      'false',
+      {
+        matchByField: 'deleted',
+        matchByValue: 'false',
+      },
     );
     return {
       http,

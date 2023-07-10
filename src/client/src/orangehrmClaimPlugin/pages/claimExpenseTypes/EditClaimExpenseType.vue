@@ -111,7 +111,7 @@ export default {
     const expenseTypeNameUniqueValidation = createUniqueValidator(
       'expenseType',
       'name',
-      props.id,
+      {entityId: props.id},
     );
     return {
       http,
