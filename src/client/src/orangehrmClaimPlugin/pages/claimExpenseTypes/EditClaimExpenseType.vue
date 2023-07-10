@@ -128,8 +128,8 @@ export default {
       rules: {
         name: [
           required,
-          shouldNotExceedCharLength(100),
           this.expenseTypeNameUniqueValidation,
+          shouldNotExceedCharLength(100),
         ],
         description: [shouldNotExceedCharLength(1000)],
       },

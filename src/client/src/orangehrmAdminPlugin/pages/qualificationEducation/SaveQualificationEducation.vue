@@ -90,8 +90,8 @@ export default {
       rules: {
         name: [
           required,
-          shouldNotExceedCharLength(100),
           this.educationUniqueValidation,
+          shouldNotExceedCharLength(100),
         ],
       },
     };

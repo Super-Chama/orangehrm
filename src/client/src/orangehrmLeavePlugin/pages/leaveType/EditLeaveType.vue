@@ -145,8 +145,8 @@ export default {
       rules: {
         name: [
           required,
-          shouldNotExceedCharLength(50),
           this.leaveTypeUniqueValidation,
+          shouldNotExceedCharLength(50),
         ],
       },
     };

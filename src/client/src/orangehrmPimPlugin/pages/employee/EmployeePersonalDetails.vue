@@ -281,8 +281,8 @@ export default {
         middleName: [shouldNotExceedCharLength(30)],
         lastName: [required, shouldNotExceedCharLength(30)],
         employeeId: [
-          shouldNotExceedCharLength(10),
           this.employeeIdUniqueValidation,
+          shouldNotExceedCharLength(10),
         ],
         otherId: [shouldNotExceedCharLength(30)],
         drivingLicenseNo: [shouldNotExceedCharLength(30)],

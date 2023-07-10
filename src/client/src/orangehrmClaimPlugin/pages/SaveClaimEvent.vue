@@ -114,8 +114,8 @@ export default {
       rules: {
         name: [
           required,
-          shouldNotExceedCharLength(100),
           this.claimEventNameUniqueValidation,
+          shouldNotExceedCharLength(100),
         ],
         description: [shouldNotExceedCharLength(1000)],
       },

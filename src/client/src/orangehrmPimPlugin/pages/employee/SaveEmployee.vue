@@ -223,8 +223,8 @@ export default {
         middleName: [shouldNotExceedCharLength(30)],
         lastName: [required, shouldNotExceedCharLength(30)],
         employeeId: [
-          shouldNotExceedCharLength(10),
           this.employeeIdUniqueValidation,
+          shouldNotExceedCharLength(10),
         ],
         empPicture: [
           maxFileSize(1024 * 1024),
@@ -232,9 +232,9 @@ export default {
         ],
         username: [
           required,
+          this.usernameUniqueValidation,
           shouldNotLessThanCharLength(5),
           shouldNotExceedCharLength(40),
-          this.usernameUniqueValidation,
         ],
         status: [required],
       },

@@ -108,8 +108,8 @@ export default {
       rules: {
         name: [
           required,
-          shouldNotExceedCharLength(50),
           this.payGradeUniqueValidation,
+          shouldNotExceedCharLength(50),
         ],
       },
       errors: [],

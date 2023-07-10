@@ -153,8 +153,8 @@ export default {
       rules: {
         name: [
           required,
-          shouldNotExceedCharLength(50),
           this.workShiftUniqueValidation,
+          shouldNotExceedCharLength(50),
         ],
         fromTime: [required, validTimeFormat],
         endTime: [

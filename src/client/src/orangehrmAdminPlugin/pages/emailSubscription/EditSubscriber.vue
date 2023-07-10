@@ -112,8 +112,8 @@ export default {
         email: [
           required,
           validEmailFormat,
-          shouldNotExceedCharLength(100),
           this.subscriberUniqueValidation,
+          shouldNotExceedCharLength(100),
         ],
       },
     };

@@ -162,37 +162,6 @@ export default {
       errors: [],
     };
   },
-  // created() {
-  //   this.isLoading = true;
-  //   // Fetch list data for unique test
-  //   const today = new Date();
-  //   const startDate =
-  //     today.getFullYear() -
-  //     100 +
-  //     '-' +
-  //     (today.getMonth() + 1) +
-  //     '-' +
-  //     today.getDate();
-  //   const endDate =
-  //     today.getFullYear() +
-  //     100 +
-  //     '-' +
-  //     (today.getMonth() + 1) +
-  //     '-' +
-  //     today.getDate();
-  //   this.http
-  //     .getAll({fromDate: startDate, toDate: endDate, limit: 0})
-  //     .then((response) => {
-  //       const {data} = response.data;
-  //       this.rules.date.push((v) => {
-  //         const index = data.findIndex((item) => item.date == v);
-  //         return index === -1 || this.$t('general.already_exists');
-  //       });
-  //     })
-  //     .finally(() => {
-  //       this.isLoading = false;
-  //     });
-  // },
 
   methods: {
     onSave() {

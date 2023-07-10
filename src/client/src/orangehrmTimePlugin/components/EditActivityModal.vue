@@ -101,8 +101,8 @@ export default {
       rules: {
         name: [
           required,
-          shouldNotExceedCharLength(100),
           this.activityNameUniqueValidation,
+          shouldNotExceedCharLength(100),
         ],
       },
     };

@@ -92,8 +92,8 @@ export default {
       rules: {
         name: [
           required,
-          shouldNotExceedCharLength(50),
           this.customerNameUniqueValidation,
+          shouldNotExceedCharLength(50),
         ],
         description: [shouldNotExceedCharLength(255)],
       },

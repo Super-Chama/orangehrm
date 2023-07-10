@@ -89,8 +89,8 @@ export default {
       rules: {
         name: [
           required,
-          shouldNotExceedCharLength(100),
           this.terminationReasonUniqueValidation,
+          shouldNotExceedCharLength(100),
         ],
       },
     };

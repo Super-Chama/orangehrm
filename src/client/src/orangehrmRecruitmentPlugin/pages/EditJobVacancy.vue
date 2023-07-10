@@ -377,8 +377,8 @@ export default {
         jobTitle: [required],
         name: [
           required,
-          shouldNotExceedCharLength(50),
           this.vacancyNameUniqueValidation,
+          shouldNotExceedCharLength(50),
         ],
         hiringManager: [
           required,

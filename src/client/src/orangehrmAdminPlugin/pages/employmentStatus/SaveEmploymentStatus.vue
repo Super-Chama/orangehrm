@@ -73,6 +73,7 @@ export default {
     const employmentStatusValidation = createUniqueValidator(
       'employmentStatus',
       'name',
+      50,
     );
 
     return {
@@ -90,8 +91,8 @@ export default {
       rules: {
         name: [
           required,
-          shouldNotExceedCharLength(50),
           this.employmentStatusValidation,
+          shouldNotExceedCharLength(50),
         ],
       },
     };

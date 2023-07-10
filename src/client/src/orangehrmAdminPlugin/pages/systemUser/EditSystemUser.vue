@@ -168,9 +168,9 @@ export default {
       rules: {
         username: [
           required,
+          this.usernameValidation,
           shouldNotLessThanCharLength(5),
           shouldNotExceedCharLength(40),
-          this.usernameValidation,
         ],
         role: [required],
         employee: [required, validSelection],
