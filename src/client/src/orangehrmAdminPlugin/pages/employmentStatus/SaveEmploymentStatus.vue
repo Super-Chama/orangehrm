@@ -73,7 +73,6 @@ export default {
     const employmentStatusValidation = createUniqueValidator(
       'employmentStatus',
       'name',
-      50,
     );
 
     return {
