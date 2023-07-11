@@ -17,10 +17,9 @@
  * Boston, MA 02110-1301, USA
  */
 
-namespace OrangeHRM\Admin\test\Api;
+namespace OrangeHRM\Tests\Admin\Api;
 
 use OrangeHRM\Admin\Api\ValidationUniqueAPI;
-use OrangeHRM\Admin\Dao\ValidationUniqueDao;
 use OrangeHRM\Framework\Services;
 use OrangeHRM\Tests\Util\EndpointIntegrationTestCase;
 use OrangeHRM\Tests\Util\Integration\TestCaseParams;
